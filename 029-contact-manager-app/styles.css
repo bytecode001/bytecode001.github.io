@@ -1,0 +1,212 @@
+/* Use the 'Poppins' font for the entire application */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Main container to center the content */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* App title styling */
+h1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Section titles styling */
+h2 {
+  margin-bottom: 20px;
+  color: #007bff; /* Blue color for a modern look */
+}
+
+/* Flexbox layout for the content */
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+/* Form container for adding new contacts */
+.form-container {
+  flex: 1;
+  min-width: 280px;
+  max-width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow for better depth */
+}
+
+/* Contacts list container */
+.contacts-container {
+  flex: 2;
+  min-width: 280px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Consistent shadow */
+}
+
+/* Styling the form */
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Spacing between input fields */
+}
+
+/* Input fields styling */
+#contact-form input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc; /* Light border for clean look */
+  border-radius: 4px;
+}
+
+/* Submit button styling */
+#contact-form button {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #007bff; /* Same blue as section titles */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer; /* Pointer to indicate clickable button */
+}
+
+/* Hover effect for submit button */
+#contact-form button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Table container for contacts to ensure responsiveness */
+.table-container {
+  overflow-x: auto; /* Horizontal scroll for smaller screens */
+}
+
+/* Styling the contacts table */
+#contacts-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Ensures table doesn’t shrink too much */
+}
+
+/* Table headers and cells */
+#contacts-table th, #contacts-table td {
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0; /* Light border for better separation */
+  text-align: left;
+  font-size: 14px;
+}
+
+/* Table header styling */
+#contacts-table th {
+  background-color: #007bff; /* Consistent blue color for headers */
+  color: #fff;
+  position: sticky; /* Keeps the header visible when scrolling */
+  top: 0;
+}
+
+/* Search input styling */
+#search {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Action buttons (Edit and Delete) styling */
+.action-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+/* Individual action buttons */
+.action-buttons button {
+  flex: 1;
+  min-width: 70px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* Edit button styling */
+.action-buttons button.edit {
+  background-color: #28a745; /* Green for edit */
+}
+
+/* Delete button styling */
+.action-buttons button.delete {
+  background-color: #dc3545; /* Red for delete */
+}
+
+/* Hover effect for action buttons */
+.action-buttons button:hover {
+  opacity: 0.9;
+}
+
+/* Responsive design: adjustments for medium screens */
+@media (max-width: 992px) {
+  /* Stack content vertically on smaller screens */
+  .content {
+      flex-direction: column;
+  }
+
+  /* Ensure containers use full width */
+  .form-container, .contacts-container {
+      max-width: 100%;
+  }
+
+  /* Adjust table for smaller screens */
+  #contacts-table {
+      min-width: unset; /* Remove the minimum width */
+  }
+
+  /* Reduce font size and padding for table */
+  #contacts-table th, #contacts-table td {
+      font-size: 12px;
+      padding: 10px;
+  }
+
+  /* Adjust action buttons */
+  .action-buttons button {
+      padding: 6px 8px;
+      font-size: 12px;
+  }
+}
+
+/* Mobile design: further adjustments for smaller devices */
+@media (max-width: 576px) {
+  /* Smaller title font size */
+  h1 {
+      font-size: 24px;
+  }
+
+  /* Smaller section title font size */
+  h2 {
+      font-size: 18px;
+  }
+
+  /* Smaller input fields and buttons */
+  #contact-form input, #search {
+      font-size: 14px;
+      padding: 10px;
+  }
+
+  #contact-form button {
+      font-size: 14px;
+      padding: 10px;
+  }
+}

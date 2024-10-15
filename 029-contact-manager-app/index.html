@@ -1,1 +1,79 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Character encoding for proper text rendering -->
+    <meta charset="UTF-8">
+    
+    <!-- The title of the page that appears in the browser tab -->
+    <title>Contact Manager</title>
+    
+    <!-- Link to Google Fonts for better typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Meta tag for ensuring the website is responsive on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <!-- Main container to hold all the content -->
+    <div class="container">
+        
+        <!-- Title of the app -->
+        <h1>Contact Manager</h1>
+        
+        <!-- Flexbox content area for the form and the contact list -->
+        <div class="content">
+            
+            <!-- Section for adding new contacts -->
+            <div class="form-container">
+                <h2>Add Contact</h2>
+                <!-- Contact form for adding new contacts -->
+                <form id="contact-form">
+                    <!-- Input field for contact name -->
+                    <input type="text" id="name" placeholder="Name" required>
+                    
+                    <!-- Input field for contact phone number -->
+                    <input type="text" id="phone" placeholder="Phone" required>
+                    
+                    <!-- Input field for contact email address -->
+                    <input type="email" id="email" placeholder="Email" required>
+                    
+                    <!-- Button to submit the form -->
+                    <button type="submit">Add</button>
+                </form>
+            </div>
+            
+            <!-- Section for displaying the list of contacts -->
+            <div class="contacts-container">
+                <h2>Contact List</h2>
+                
+                <!-- Search bar for filtering contacts -->
+                <input type="text" id="search" placeholder="Search Contact">
+                
+                <!-- Table container to hold the contact list -->
+                <div class="table-container">
+                    <!-- Table for displaying contacts -->
+                    <table id="contacts-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Contact rows will be dynamically generated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
