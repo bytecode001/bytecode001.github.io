@@ -1,0 +1,82 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #6a11cb, #2575fc); 
+    color: #333; 
+}
+
+.container {
+    text-align: center;
+    background: #ffffff; 
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    color: #333; 
+}
+
+.converter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-section, .output-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 1em;
+    margin-bottom: 5px;
+    color: #555; 
+}
+
+input, select {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    font-size: 1em;
+    width: 100%;
+    max-width: 300px;
+    color: #333; 
+}
+
+input[readonly] {
+    background-color: #f0f0f0; 
+    color: #333;
+}
+
+#swapButton, #convertButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2575fc; 
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px;
+    width: 100%;
+    max-width: 200px;
+}
+
+#swapButton:hover, #convertButton:hover {
+    background-color: #6a11cb; 
+}

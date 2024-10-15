@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length Unit Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Length Unit Converter</h1>
+        <div class="converter">
+            <div class="input-section">
+                <label for="inputValue">Input Value</label>
+                <input type="number" id="inputValue" placeholder="Enter value" />
+                
+                <label for="inputUnit">From</label>
+                <select id="inputUnit">
+                    <option value="meters">Meters</option>
+                    <option value="kilometers">Kilometers</option>
+                    <option value="miles">Miles</option>
+                    <option value="feet">Feet</option>
+                    <option value="inches">Inches</option>
+                    <option value="centimeters">Centimeters</option>
+                    <option value="millimeters">Millimeters</option>
+                    <option value="yards">Yards</option>
+                </select>
+            </div>
+            <div class="output-section">
+                <label for="outputUnit">To</label>
+                <select id="outputUnit">
+                    <option value="meters">Meters</option>
+                    <option value="kilometers">Kilometers</option>
+                    <option value="miles">Miles</option>
+                    <option value="feet">Feet</option>
+                    <option value="inches">Inches</option>
+                    <option value="centimeters">Centimeters</option>
+                    <option value="millimeters">Millimeters</option>
+                    <option value="yards">Yards</option>
+                </select>
+                
+                <input type="text" id="outputValue" placeholder="Converted value" readonly />
+            </div>
+            <button id="swapButton">Swap Units</button>
+            <button id="convertButton">Convert</button>
+        </div>
+    </div>
 
+    <script src="script.js"></script>
+</body>
+</html>
