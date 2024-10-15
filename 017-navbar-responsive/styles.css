@@ -1,0 +1,172 @@
+/* Reset default margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Brand title styling */
+.brand-title {
+    color: white;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+/* Navbar links - desktop view */
+.navbar-links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar-links ul li {
+    padding: 0 15px;
+    position: relative;
+}
+
+/* Link styling */
+.navbar-links ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 12px;
+    display: block;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for links */
+.navbar-links ul li a:hover {
+    background-color: #575757;
+    border-radius: 4px;
+}
+
+/* Dropdown menu styling */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease; /* Smooth dropdown transition */
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for dropdown links */
+.dropdown-content a:hover {
+    background-color: #575757;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+    opacity: 1; /* Make the dropdown visible */
+}
+
+/* Dropdown arrow styling */
+.arrow {
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+/* Hamburger icon styling */
+.toggle-button {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 15;
+    color: white;
+}
+
+.toggle-button .bar {
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar-links {
+        display: none; /* Hide by default on mobile */
+        flex-direction: column;
+        width: 100%;
+        background-color: #333;
+        position: fixed; /* Cover the entire screen */
+        top: 0;
+        left: 0;
+        height: 100vh; /* Cover full screen height */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navbar-links ul {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar-links ul li {
+        padding: 10px 0;
+    }
+
+    .dropdown-content {
+        position: static; /* Align dropdown centrally */
+        background-color: transparent;
+        text-align: center;
+        padding: 0;
+        opacity: 1; /* Make dropdown visible */
+    }
+
+    .toggle-button {
+        display: flex; /* Show hamburger icon */
+    }
+
+    .navbar-links.active {
+        display: flex; /* Show menu when hamburger is clicked */
+    }
+}
+
+@media (min-width: 769px) {
+    .navbar-links {
+        display: flex; /* Show navbar links on desktop */
+    }
+
+    .toggle-button {
+        display: none; /* Hide hamburger icon on desktop */
+    }
+}

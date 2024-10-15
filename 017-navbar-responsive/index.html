@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <!-- Brand title or logo -->
+        <div class="brand-title">MyBrand</div>
 
+        <!-- Hamburger icon for mobile view -->
+        <a href="javascript:void(0);" class="toggle-button" id="toggle-button">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </a>
+
+        <!-- Navigation links -->
+        <div class="navbar-links" id="navbar-links">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropbtn">Services <span class="arrow">&#9662;</span></a>
+                    <div class="dropdown-content">
+                        <a href="#">Web Design</a>
+                        <a href="#">SEO</a>
+                        <a href="#">Marketing</a>
+                    </div>
+                </li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
