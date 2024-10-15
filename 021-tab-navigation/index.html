@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Tab Navigation with Fade Effect</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Link to Font Awesome for tab icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Main container for the tab navigation -->
+    <div class="tab-container">
+        <!-- Tab buttons: each button represents a tab and has an icon -->
+        <div class="tabs">
+            <button class="tab-link active" data-tab="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </button>
+            <button class="tab-link" data-tab="services">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Services</span>
+            </button>
+            <button class="tab-link" data-tab="about">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </button>
+            <button class="tab-link" data-tab="contact">
+                <i class="fas fa-envelope"></i>
+                <span>Contact</span>
+            </button>
+        </div>
 
+        <!-- Content for each tab, initially only the 'Home' tab content is visible -->
+        <div class="tab-content active" id="home">
+            <h2>Welcome to Home</h2>
+            <p>This is the home tab content.</p>
+        </div>
+        <div class="tab-content" id="services">
+            <h2>Our Services</h2>
+            <p>Details about services go here.</p>
+        </div>
+        <div class="tab-content" id="about">
+            <h2>About Us</h2>
+            <p>Learn more about us here.</p>
+        </div>
+        <div class="tab-content" id="contact">
+            <h2>Contact Us</h2>
+            <p>Get in touch via this tab.</p>
+        </div>
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>

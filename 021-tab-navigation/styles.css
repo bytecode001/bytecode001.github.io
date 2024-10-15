@@ -1,0 +1,98 @@
+/* RESET and GLOBAL STYLES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding doesn't add extra width/height */
+  font-family: 'Arial', sans-serif; /* Default font for readability */
+}
+
+body {
+  background-color: #f4f4f9; /* Light background for a clean look */
+  display: flex;
+  justify-content: center; /* Center the container horizontally */
+  align-items: center; /* Center the container vertically */
+  height: 100vh; /* Full screen height */
+}
+
+/* TAB CONTAINER STYLES */
+.tab-container {
+  width: 80%;
+  max-width: 800px; /* Restrict container width on larger screens */
+  background-color: #fff;
+  border-radius: 10px; /* Rounded corners for a modern look */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* TAB BUTTON STYLES */
+.tabs {
+  display: flex; /* Align the tab buttons in a row */
+  justify-content: space-around; /* Even spacing between buttons */
+  background-color: #4CAF50; /* Green background for the tabs */
+  padding: 10px 0; /* Vertical padding for tab area */
+}
+
+.tab-link {
+  background-color: transparent; /* No background to let the container color show through */
+  border: none; /* Remove default button borders */
+  outline: none; /* Remove default focus outline */
+  color: white; /* White text and icons */
+  font-size: 18px; /* Text size for readability */
+  display: flex; /* Align icon and text in a row */
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+  cursor: pointer; /* Show pointer cursor to indicate clickability */
+  padding: 10px 20px; /* Padding inside each tab button */
+  transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+/* Icon size */
+.tab-link i {
+  font-size: 20px;
+}
+
+/* Hover effect for tab buttons */
+.tab-link:hover {
+  background-color: #3e8e41; /* Slightly darker green on hover */
+}
+
+/* Active tab button */
+.tab-link.active {
+  background-color: #2e7031; /* Darker green to indicate active state */
+}
+
+/* TAB CONTENT STYLES */
+.tab-content {
+  opacity: 0; /* Initially, content is invisible */
+  height: 0; /* Content is collapsed when hidden */
+  overflow: hidden; /* Prevent content overflow when hidden */
+  transition: opacity 0.5s ease, height 0s ease 0.5s; /* Smooth opacity transition with delayed height change */
+  padding: 0 20px; /* Padding is hidden when content is collapsed */
+}
+
+.tab-content.active {
+  opacity: 1; /* Fade in the content */
+  height: auto; /* Automatically adjust the height based on content */
+  transition: opacity 0.5s ease, height 0s; /* Fade in smoothly */
+  padding: 20px; /* Restore padding for visible content */
+}
+
+h2 {
+  color: #333; /* Dark text color for headings */
+}
+
+p {
+  color: #666; /* Light gray for paragraphs */
+}
+
+/* MEDIA QUERIES FOR RESPONSIVE DESIGN */
+@media (max-width: 600px) {
+  /* Reduce the size of the icons and text on mobile screens */
+  .tab-link {
+      font-size: 14px; /* Smaller text */
+      padding: 8px 10px; /* Less padding */
+  }
+
+  .tab-link i {
+      font-size: 16px; /* Smaller icons */
+  }
+}
