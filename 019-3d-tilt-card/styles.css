@@ -1,0 +1,72 @@
+/* Resetting the default margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styling the body to center the card on the screen */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full screen height */
+    overflow: hidden; /* Prevents scrollbars if the card moves out of view */
+}
+
+/* The container for the card, adding perspective for the 3D effect */
+.card-container {
+    perspective: 1000px; /* Creates the 3D depth. A higher number results in a shallower effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The card styling: size, background, shadow, and 3D transformation */
+.card {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden; /* Ensures the content stays inside the card */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Soft shadow around the card */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for transformations */
+    transform-style: preserve-3d; /* Ensures that child elements (image, text) are also part of the 3D effect */
+    cursor: pointer;
+}
+
+/* Styling the image inside the card */
+.card-image img {
+    width: 100%; /* Ensures the image spans the full width of the card */
+    height: 200px; /* Fixed height for the image */
+    object-fit: cover; /* Ensures the image covers the entire area without being distorted */
+    border-bottom: 1px solid #ddd; /* A slight border to separate the image from the content */
+}
+
+/* Styling for the content section of the card */
+.card-content {
+    padding: 20px;
+    text-align: center;
+    height: 200px; /* Equal height to the image section */
+}
+
+/* Title text styling */
+.card-content h3 {
+    font-size: 1.5rem;
+    color: #333; /* Darker color for the title */
+}
+
+/* Description text styling */
+.card-content p {
+    font-size: 1rem;
+    color: #666; /* Lighter color for the description text */
+    margin-top: 10px;
+}
+
+/* Adding a hover effect to enhance the card's visual appeal */
+.card:hover {
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2); /* Increases the shadow to make the card feel more elevated */
+}
