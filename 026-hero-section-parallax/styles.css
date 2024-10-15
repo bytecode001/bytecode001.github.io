@@ -1,0 +1,195 @@
+/* General reset for padding, margins, and box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Basic styling for the body of the webpage */
+body {
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+  background-color: #333; /* Dark background to create contrast */
+}
+
+/* Header styling */
+header {
+  display: flex; /* Flexbox to align logo and menu side-by-side */
+  justify-content: space-between; /* Places logo on the left, menu on the right */
+  align-items: center; /* Vertically centers the items */
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  position: fixed; /* Makes header stay at the top while scrolling */
+  width: 100%; /* Full-width header */
+  z-index: 1000; /* Ensures the header stays above other elements */
+}
+
+/* Styling for the logo, including FontAwesome hamburger icon */
+.logo {
+  display: flex; /* Aligns icon and text horizontally */
+  align-items: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* Adds margin between the icon and text */
+.logo i {
+  margin-right: 10px;
+}
+
+/* Styling for the navigation menu */
+.menu {
+  list-style: none; /* Removes default bullet points */
+  display: flex; /* Flexbox for horizontal alignment of menu items */
+}
+
+/* Styling for each individual menu item */
+.menu li {
+  margin-left: 20px;
+}
+
+/* Links inside the menu, including hover effect */
+.menu li a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s ease-in-out; /* Smooth transition for color change */
+}
+
+/* Changes color of the link when hovered over */
+.menu li a:hover {
+  color: #ffbf00; /* Bright yellow color on hover */
+}
+
+/* Hamburger icon styling, only visible on mobile screens */
+.hamburger-icon {
+  display: none; /* Hidden by default on larger screens */
+  flex-direction: column; /* Stacks the spans vertically */
+  cursor: pointer; /* Changes the mouse cursor to indicate clickability */
+}
+
+/* Each span inside the hamburger icon (the three bars) */
+.hamburger-icon span {
+  width: 25px;
+  height: 3px;
+  background-color: #fff; /* White bars for contrast against dark background */
+  margin: 4px 0; /* Spacing between bars */
+  transition: all 0.3s ease; /* Smooth transition for any changes */
+}
+
+/* Hero section styling */
+.hero {
+  height: 100vh; /* Full viewport height for immersive experience */
+  background-image: url('https://images.unsplash.com/photo-1487004121828-9fa15a215a7a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-attachment: fixed; /* Enables Parallax scrolling */
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center; /* Centers the background image */
+  display: flex; /* Flexbox for centering content */
+  align-items: center; /* Vertically center content */
+  justify-content: center; /* Horizontally center content */
+  text-align: center; /* Centers text inside the hero */
+}
+
+/* Styling for the content inside the hero section */
+.hero-content {
+  background-color: rgba(0, 0, 0, 0.6); /* Adds a semi-transparent background for readability */
+  padding: 40px;
+  border-radius: 10px; /* Slight rounding of the corners */
+  z-index: 2; /* Ensures the text stays above the background image */
+}
+
+/* Main headline inside the hero section */
+.hero h1 {
+  font-size: 3em; /* Large text size to grab attention */
+  margin-bottom: 20px;
+}
+
+/* Subheading text inside the hero section */
+.hero p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+/* Call-to-action button styling */
+.cta-btn {
+  padding: 10px 20px;
+  background-color: #ffbf00; /* Bright yellow button */
+  color: #000;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.cta-btn:hover {
+  background-color: #ff8000; /* Darker yellow on hover */
+}
+
+/* About section styling */
+.about {
+  padding: 60px 20px;
+  background-color: #222; /* Dark background for contrast with text */
+  color: #fff;
+  text-align: center;
+}
+
+/* About section heading */
+.about h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+/* About section paragraph styling */
+.about p {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6; /* Improves readability */
+}
+
+/* Attribution section styling */
+.attribution {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 0.9em;
+  color: #ccc; /* Lighter color to keep it subtle */
+}
+
+.attribution a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.attribution a:hover {
+  text-decoration: underline;
+}
+
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  /* Hide the main navigation menu and show it only when active on small screens */
+  .menu {
+    display: none;
+    flex-direction: column; /* Vertical alignment on mobile */
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+  }
+
+  /* Display the menu when the hamburger icon is clicked */
+  .menu.active {
+    display: flex;
+  }
+
+  /* Individual menu items in mobile view */
+  .menu li {
+    margin: 10px 0;
+  }
+
+  /* Show the hamburger icon on small screens */
+  .hamburger-icon {
+    display: flex;
+  }
+}
