@@ -1,0 +1,127 @@
+/* Resetting some default styles */
+body, h1, p, a, ul, li {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    list-style: none; /* Removes bullets from lists */
+    text-decoration: none; /* Removes underlines from links */
+}
+
+/* Basic body setup */
+body {
+    height: 100vh; /* Full viewport height */
+    display: flex; /* Flexbox layout for body */
+    flex-direction: column; /* Stack children vertically */
+    background: linear-gradient(to right, #00c6ff, #0072ff); /* Background gradient */
+    color: #fff; /* Text color */
+    overflow: hidden; /* Prevent scrolling */
+}
+
+/* Header Styles */
+.header {
+    width: 100%; /* Full width */
+    padding: 20px 40px; /* Padding around header content */
+    display: flex; /* Flexbox layout for header */
+    justify-content: space-between; /* Space between logo and navbar */
+    align-items: center; /* Center items vertically */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    position: fixed; /* Fixes the header at the top */
+    top: 0; /* Aligns header to the top */
+    left: 0; /* Aligns header to the left */
+    z-index: 1000; /* Ensures header stays on top */
+    box-sizing: border-box; /* Includes padding in width/height calculations */
+    overflow: hidden; /* Prevents overflow */
+}
+
+.logo a {
+    font-size: 1.5rem; /* Larger font size for the logo */
+    font-weight: bold; /* Bold font for the logo */
+    color: #fff; /* White color for the logo */
+}
+
+.navbar ul {
+    display: flex; /* Flexbox layout for the navbar */
+    gap: 20px; /* Space between navbar items */
+    flex-wrap: wrap; /* Allows wrapping of items on small screens */
+}
+
+.navbar a {
+    color: #fff; /* White color for the links */
+    font-size: 1rem; /* Standard font size */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.navbar a:hover {
+    color: #ff6f61; /* Changes color on hover */
+}
+
+/* Hero Section */
+.hero {
+    flex: 1; /* Takes up remaining vertical space */
+    display: flex; /* Flexbox layout for hero section */
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    text-align: center; /* Centers text */
+    padding: 0 20px; /* Horizontal padding */
+    position: relative; /* Relative positioning for layering */
+    z-index: 1; /* Ensures hero content is above canvas */
+    margin-top: 80px; /* Space for the fixed header */
+}
+
+.hero-content {
+    max-width: 600px; /* Restrict maximum width */
+    animation: fadeIn 2s ease-in-out; /* Fade-in animation */
+}
+
+h1 {
+    font-size: 3rem; /* Large font size for heading */
+    margin-bottom: 20px; /* Space below the heading */
+    opacity: 0; /* Initially hidden */
+    animation: fadeUp 2s ease-in-out forwards; /* Fade-up animation */
+}
+
+p {
+    font-size: 1.2rem; /* Standard font size for paragraph */
+    margin-bottom: 30px; /* Space below the paragraph */
+    line-height: 1.6; /* Increases line spacing */
+    opacity: 0; /* Initially hidden */
+    animation: fadeUp 2s ease-in-out 0.5s forwards; /* Delayed fade-up animation */
+}
+
+.hero-btn {
+    display: inline-block; /* Block-level button */
+    padding: 15px 30px; /* Padding around the button */
+    background-color: #ff6f61; /* Button background color */
+    color: #fff; /* White text color */
+    font-size: 1rem; /* Standard font size */
+    text-decoration: none; /* No underline */
+    border-radius: 50px; /* Rounded button */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effects */
+}
+
+.hero-btn:hover {
+    background-color: #ff5a4e; /* Darker color on hover */
+    transform: scale(1.1); /* Slightly enlarges on hover */
+}
+
+/* Keyframe animations for fading in and up */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Canvas styling */
+#confetti-canvas {
+    position: fixed; /* Fixed position to cover the screen */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    pointer-events: none; /* Allows clicks to pass through */
+    z-index: 0; /* Places canvas behind content */
+}
