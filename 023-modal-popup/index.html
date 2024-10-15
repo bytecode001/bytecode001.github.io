@@ -1,1 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscribe for a Free Gift!</title>
+  <!-- Linking external CSS for styling -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Button that opens the modal -->
+  <!-- The button has an ID so we can reference it in JavaScript for event handling -->
+  <button id="openModal" class="open-modal-btn">🎁 Get Your Free Gift!</button>
 
+  <!-- Modal container -->
+  <!-- The modal div is hidden by default and appears when triggered by JavaScript -->
+  <div id="modal" class="modal">
+    <!-- Modal content box -->
+    <!-- This is where the actual modal content (text, form, etc.) is placed -->
+    <div class="modal-content">
+      <!-- Close button (X) to hide the modal when clicked -->
+      <span id="closeModal" class="close">&times;</span>
+      <!-- Modal title for the signup call-to-action -->
+      <h2>🎉 Sign Up for Our Newsletter!</h2>
+      <!-- Description to entice the user to sign up by offering a free gift -->
+      <p>Subscribe to our newsletter and receive a <strong>free gift</strong> 🎁 along with exclusive updates 📧!</p>
+      
+      <!-- Form to capture the user's email -->
+      <!-- The form doesn't have action since we’re only simulating the process in this example -->
+      <form id="subscribeForm">
+        <!-- Input field where users enter their email address -->
+        <input type="email" placeholder="Enter your email" required class="email-input">
+        <!-- Submit button to confirm the subscription -->
+        <button type="submit" class="submit-btn">Subscribe Now 🚀</button>
+      </form>
+
+      <!-- A secondary button to close the modal -->
+      <button class="close-modal-btn">Close</button>
+    </div>
+  </div>
+
+  <!-- Linking external JavaScript for functionality -->
+  <script src="script.js"></script>
+</body>
+</html>
