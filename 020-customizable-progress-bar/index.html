@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customizable Progress Bar</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
+  <div class="card">
+    <h2 class="card-title">Progress Bar</h2>
+
+    <!-- Input field where the user can specify the loading time in seconds -->
+    <label for="timeInput">Enter load time (in seconds):</label>
+    <input type="number" id="timeInput" min="1" value="4" />
+    
+    <!-- Container for the progress bar -->
+    <div class="progress-container">
+      <!-- The progress bar, which will expand as time passes -->
+      <div class="progress-bar" id="progressBar">
+        <!-- Display the percentage of progress inside the bar -->
+        <span id="progressText">0%</span>
+      </div>
+    </div>
+
+    <!-- Display the time elapsed -->
+    <p id="timer">Time: 0s</p>
+
+    <!-- Completion message that will appear when the progress bar reaches 100% -->
+    <p id="completionText" class="hidden">
+      &#10004; Progress Completed!
+    </p>
+    
+    <!-- Buttons to start and reset the progress bar -->
+    <button class="start-button" onclick="startProgress()">Start Progress</button>
+    <button class="reset-button" onclick="resetProgress()">Reset</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

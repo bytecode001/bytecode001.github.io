@@ -1,0 +1,118 @@
+/* Basic reset for margins, padding, and box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensures padding and borders are included in element width/height */
+  }
+  
+  /* Styling the body to center the content both vertically and horizontally */
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Light gradient background */
+    font-family: 'Arial', sans-serif; /* Simple, legible font */
+  }
+  
+  /* Styling the main card container */
+  .card {
+    background-color: #fff; /* White background for contrast */
+    border-radius: 10px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 20px; /* Spacing inside the card */
+    text-align: center; /* Center the text inside the card */
+    width: 50%; /* Set width as 50% of the viewport */
+    max-width: 500px; /* Maximum width of the card */
+  }
+  
+  /* Styling for the input label */
+  label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block; /* Ensures the label appears above the input */
+  }
+  
+  /* Input field for time duration */
+  input[type="number"] {
+    padding: 10px; /* Adds padding inside the input field */
+    border: 2px solid #ccc; /* Light border for the input */
+    border-radius: 5px; /* Rounded corners for the input field */
+    width: 100%; /* Full width of the container */
+    max-width: 150px; /* Limits the input's maximum width */
+    text-align: center; /* Centers the input text */
+  }
+  
+  /* Container for the progress bar */
+  .progress-container {
+    width: 100%; /* Full width of the container */
+    height: 30px; /* Fixed height for the progress bar */
+    background-color: #e0e0e0; /* Light gray background for the container */
+    border-radius: 15px; /* Rounded corners for the container */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    position: relative; /* Ensures elements inside can be positioned absolutely */
+    margin: 20px 0; /* Spacing above and below the container */
+  }
+  
+  /* The progress bar itself */
+  .progress-bar {
+    height: 100%; /* Full height of the container */
+    width: 0; /* Start with a width of 0% */
+    background-color: #4caf50; /* Green background for the bar */
+    border-radius: 15px; /* Rounded corners for the progress bar */
+    transition: width 0.4s ease-in-out; /* Smooth transition when the width changes */
+  }
+  
+  /* Text showing the progress percentage */
+  #progressText {
+    position: absolute; /* Positioned inside the progress bar */
+    right: 10px; /* 10px from the right edge */
+    color: white; /* White text for contrast against the green bar */
+    font-weight: bold; /* Bold text for visibility */
+    line-height: 30px; /* Vertically centers the text inside the progress bar */
+  }
+  
+  /* Styling for the "Progress Completed" message */
+  #completionText {
+    font-size: 24px; /* Larger font size for emphasis */
+    color: #4caf50; /* Green color to match the progress bar */
+    margin-top: 20px; /* Spacing above the message */
+  }
+  
+  /* Class to hide the completion message initially */
+  .hidden {
+    display: none;
+  }
+  
+  /* Styling for the buttons */
+  .start-button, .reset-button {
+    padding: 10px 20px; /* Adds padding inside the buttons */
+    border-radius: 5px; /* Rounded corners for the buttons */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    font-size: 16px; /* Slightly larger font for legibility */
+    margin: 10px; /* Adds space between the buttons */
+  }
+  
+  /* Start button styling */
+  .start-button {
+    background-color: #4caf50; /* Green background to match the progress bar */
+    color: white; /* White text for contrast */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
+  }
+  
+  /* Hover effect for the start button */
+  .start-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  /* Reset button styling */
+  .reset-button {
+    background-color: #ff9800; /* Orange background for the reset button */
+    color: white; /* White text for contrast */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
+  }
+  
+  /* Hover effect for the reset button */
+  .reset-button:hover {
+    background-color: #f57c00; /* Darker orange on hover */
+  }
