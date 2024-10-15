@@ -1,0 +1,182 @@
+/* Define color variables for light mode */
+:root {
+    --primary-bg: #efeeea;
+    --primary-text: #333;
+    --secondary-text: #555;
+    --cta-bg: #829466;
+    --cta-text: #fff;
+    --accent-color: #88b04b;
+    --menu-hover: #829466;
+  }
+  
+  /* Dark mode color variables */
+  body.dark-mode {
+    --primary-bg: #1f1f1f;
+    --primary-text: #f9f9f9;
+    --secondary-text: #aaaaaa;
+    --cta-bg: #C3B2C8;
+    --cta-text: #fff;
+    --accent-color: #ffab40;
+  }
+  
+  /* Global styles for the body element */
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    /* Smooth transition for background and text color changes */
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* Header styling, with space between logo and navigation */
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: var(--primary-bg);
+    transition: background-color 0.3s;
+    align-items: center;
+  }
+  
+  /* Flexbox styling for the navigation container */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  /* Styling for the logo text */
+  .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-text);
+  }
+  
+  /* Navigation menu styling */
+  .menu {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin-left: auto; /* Ensures the menu is aligned to the right */
+  }
+  
+  /* Styling for individual navigation links */
+  .menu li a {
+    text-decoration: none;
+    color: var(--primary-text);
+    transition: color 0.3s;
+  }
+  
+  /* Hover effect for navigation links */
+  .menu li a:hover {
+    color: var(--menu-hover);
+  }
+  
+  /* Styling for the dark/light theme toggle button */
+  #theme-toggle {
+    background: none;
+    border: 1px solid var(--primary-text);
+    font-size: 1.1rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-left: 2rem;
+  }
+  
+  /* Dark mode specific styles for the toggle button */
+  body.dark-mode #theme-toggle {
+    color: var(--primary-text);
+    border-color: var(--primary-text);
+  }
+  
+  /* Hover effect for the toggle button */
+  #theme-toggle:hover {
+    background-color: var(--menu-hover);
+    color: var(--cta-text);
+  }
+  
+  /* Hero section layout and styling */
+  .hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4rem 2rem;
+    background-color: var(--primary-bg);
+    transition: background-color 0.3s;
+  }
+  
+  /* Hero content styling for text and buttons */
+  .hero-content {
+    max-width: 50%;
+  }
+  
+  /* Main title styling in the hero section */
+  .hero h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--primary-text);
+    margin: 0;
+  }
+  
+  /* Paragraph styling in the hero section */
+  .hero p {
+    font-size: 1.5rem;
+    color: var(--secondary-text);
+    margin: 1rem 0;
+  }
+  
+  /* Call-to-action button styling */
+  .cta-button {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--cta-bg);
+    color: var(--cta-text);
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  /* Hover effect for the call-to-action button */
+  .cta-button:hover {
+    background-color: #5f7240;
+  }
+  
+  /* Styling for the image container in the hero section */
+  .hero-image {
+    max-width: 800px;
+  }
+  
+  /* Styling for the image inside the hero section */
+  .hero-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    /* Smooth transition for hover effects */
+    transition: transform 0.3s;
+  }
+  
+  /* Zoom effect when the image is hovered */
+  .hero-image img:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Footer styling */
+  footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Footer links styling */
+  footer a {
+    color: var(--primary-text);
+  }
+  
+  /* Hover effect for footer links */
+  footer a:hover {
+    color: var(--menu-hover);
+  }
+  
