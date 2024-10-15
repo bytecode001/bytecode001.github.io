@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for responsive design and character encoding -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker</title>
+    
+    <!-- Link to external CSS file for custom styling -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google Font for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js library for rendering bar chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Main container wrapping all content -->
+    <div class="container">
+        <!-- Header with main title and description -->
+        <header>
+            <h1>Fitness Tracker</h1>
+            <p>Track your workouts and calories burned</p>
+        </header>
+
+        <!-- Section for adding workout data with form input -->
+        <section class="input-section">
+            <h2>Add Workout</h2>
+            <!-- Form for user input with workout name and calories burned -->
+            <form id="workout-form">
+                <input type="text" id="workout-name" placeholder="Workout Name" required>
+                <input type="number" id="calories-burned" placeholder="Calories Burned" required min="1">
+                <button type="submit">Add Workout</button>
+            </form>
+            <!-- Displaying the total calories burned -->
+            <div class="total-calories">
+                <h3>Total Calories Burned: <span id="total-calories">0</span></h3>
+            </div>
+        </section>
+
+        <!-- Section for listing all added workouts -->
+        <section class="workout-list">
+            <h2>Your Workouts</h2>
+            <!-- Unordered list where each workout will be dynamically added -->
+            <ul id="workouts"></ul>
+        </section>
+
+        <!-- Section for displaying the calories burned chart -->
+        <section class="chart-section">
+            <h2>Calories Burned Chart</h2>
+            <!-- Canvas element for the chart -->
+            <canvas id="caloriesChart"></canvas>
+        </section>
+    </div>
+
+    <!-- Link to external JavaScript file for functionality -->
+    <script src="script.js"></script>
+</body>
+</html>
