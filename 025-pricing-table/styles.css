@@ -1,0 +1,146 @@
+/* General Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif; /* Basic font-family */
+}
+
+body {
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Subtle gradient background */
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full viewport height */
+}
+
+/* Pricing Section Styling */
+.pricing-section {
+  text-align: center;
+}
+
+.pricing-section h1 {
+  font-size: 2.5rem; /* Large title font size */
+  margin-bottom: 30px;
+  color: #333; /* Dark text color for title */
+}
+
+/* Pricing Cards Layout */
+.pricing-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns for cards */
+  gap: 20px; /* Space between cards */
+  max-width: 1200px; /* Maximum container width */
+  margin: 0 auto; /* Center align */
+}
+
+/* Individual Pricing Card Styling */
+.pricing-card {
+  background-color: #ffffff; /* White background */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Light shadow */
+  padding: 30px; /* Inner padding */
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  transform-style: preserve-3d; /* Enable 3D effect for smooth scaling */
+}
+
+/* Hover Effect on Pricing Cards */
+.pricing-card:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+  background-color: #4b89dc; /* Change background color to blue */
+  color: #fff; /* Change text color to white */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), 0 0 20px #4b89dc; /* Glow effect with shadow */
+}
+
+/* Text Colors for Hover Effect */
+.pricing-card h2, .pricing-card .price, .pricing-card .features li, .pricing-card .websites {
+  transition: color 0.3s ease; /* Smooth transition for text color */
+}
+
+/* Change text color to white on hover */
+.pricing-card:hover h2, .pricing-card:hover .price, .pricing-card:hover .features li, .pricing-card:hover .websites {
+  color: #fff;
+}
+
+/* Pricing Card Title */
+.pricing-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #333; /* Dark text color */
+}
+
+/* Price Section Styling */
+.price {
+  font-size: 2.2rem; /* Larger font for price */
+  font-weight: bold;
+  color: #4b89dc; /* Blue text for price */
+}
+
+.price span {
+  font-size: 1rem;
+  color: #666; /* Lighter text for /month */
+}
+
+/* Features List Styling */
+.features {
+  list-style-type: none; /* Remove bullet points */
+  margin-bottom: 40px; /* Space between features and button */
+  margin-top: 40px;
+}
+
+.features li {
+  margin-bottom: 10px; /* Space between list items */
+  font-size: 1rem;
+  color: #555; /* Slightly dark text color */
+}
+
+/* Button Styling */
+.btn {
+  background-color: #4b89dc; /* Blue background */
+  color: #fff; /* White text */
+  border: none;
+  padding: 10px 20px; /* Padding inside the button */
+  font-size: 1rem;
+  cursor: pointer; /* Change cursor to pointer on hover */
+  border-radius: 5px; /* Rounded button */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* Button Hover Effect */
+.btn:hover {
+  background-color: #3a6fb1; /* Darker blue on hover */
+}
+
+/* Change button to white with blue text on card hover */
+.pricing-card:hover .btn {
+  background-color: #fff; /* White background */
+  color: #4b89dc; /* Blue text */
+}
+
+/* Best Value Badge Styling */
+.best-value {
+  background-color: #ffffff; /* Initially same white as other cards */
+}
+
+.best-value .btn {
+  background-color: #4b89dc;
+  color: #fff;
+}
+
+.best-value:hover {
+  background-color: #4b89dc;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), 0 0 20px #4b89dc; /* Glow effect for best value card */
+}
+
+.best-value .btn:hover {
+  background-color: #fff;
+  color: #4b89dc; /* Blue text for button on hover */
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 768px) {
+  .pricing-wrapper {
+      grid-template-columns: 1fr; /* Stack cards vertically on small screens */
+  }
+}
