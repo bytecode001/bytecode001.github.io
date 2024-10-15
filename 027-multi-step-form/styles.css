@@ -1,0 +1,162 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-image: url('img_01.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Container for the multi-step form */
+.form-container {
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background for glassmorphism */
+  backdrop-filter: blur(10px); /* Glass effect with blur */
+  padding: 20px;
+  border-radius: 15px;
+  width: 400px;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border for glassmorphism effect */
+}
+
+/* Title of the form */
+h2 {
+  text-align: center;
+  color: #fff; /* White text to contrast with the background */
+}
+
+/* Step indicators: circular elements for each form step */
+.steps-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.step {
+  text-align: center;
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent background for inactive steps */
+  border-radius: 50%;
+  display: inline-block;
+  line-height: 30px;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.4s ease-in-out; /* Smooth transition when a step becomes active */
+}
+
+.active-step .step-number {
+  background-color: #74c69d; /* Green color for the active step */
+}
+
+/* Each step of the form, hidden by default */
+.form-step {
+  display: none;
+}
+
+/* Active step: shown with fade-in animation */
+.form-step-active {
+  display: block;
+  opacity: 0;
+  animation: fadeIn 0.4s forwards; /* Fade-in effect */
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Styling for the input fields */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #fff; /* White text for contrast */
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent input field background */
+  color: #fff;
+}
+
+/* Error messages for form validation */
+.error-message {
+  color: #ff4b5c; /* Red for error messages */
+  font-size: 0.8em;
+}
+
+/* Buttons: "Next", "Previous", and "Submit" */
+.btn-next, .btn-prev, .btn-submit {
+  background-color: #74c69d; /* Green button background */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-next:hover, .btn-prev:hover, .btn-submit:hover {
+  background-color: #52b788; /* Darker green on hover */
+}
+
+.btn-prev {
+  margin-right: 10px; /* Small margin to separate from the next button */
+}
+
+/* Footer for image attribution */
+footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #ffffff;
+}
+
+footer a {
+  color: #ffffff;
+  text-decoration: none;
+  border-bottom: 1px solid #ffffff;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+footer a:hover {
+  color: #74c69d; /* Matching green for links on hover */
+  border-bottom: 1px solid #74c69d;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #ffffff;
+}
+
+footer a {
+  color: #ffffff;
+  text-decoration: none;
+  border-bottom: 1px solid #ffffff;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+footer a:hover {
+  color: #74c69d; /* Armonizzato con il verde del form */
+  border-bottom: 1px solid #74c69d;
+}
