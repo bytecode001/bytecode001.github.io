@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form - Woodcraft</title>
+    <!-- Link to Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto:wght@400;500&display=swap">
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main container for centering the login card on the screen -->
+    <div class="container">
+        <!-- Login card containing both the image and the form -->
+        <div class="login-card">
+            <!-- Left side of the card containing the decorative image -->
+            <div class="card-left">
+                <div class="image-cover">
+                    <img src="https://images.unsplash.com/photo-1724832228136-6ddd51037827?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Decorative Furniture Image">
+                </div>
+            </div>
+            <!-- Right side of the card containing the login form -->
+            <div class="card-right">
+                <!-- Title of the login form -->
+                <h1 class="title">Woodcraft</h1>
+                <!-- Subtitle welcoming the user -->
+                <h2 class="welcome">Welcome to Woodcraft</h2>
+                <!-- Form for user input -->
+                <form action="#" method="POST">
+                    <!-- Input group for username or email -->
+                    <div class="input-group">
+                        <label for="username">Username or Email</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <!-- Input group for password -->
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <!-- Actions section containing the Sign In button and forgot password link -->
+                    <div class="actions">
+                        <button type="submit" class="btn">Sign in</button>
+                        <a href="#" class="forgot-password">Forgot password?</a>
+                    </div>
+                    <!-- Divider text for alternative login options -->
+                    <div class="or-divider">or</div>
+                    <!-- Google Sign In button -->
+                    <div class="google-signin">
+                        <button type="button" class="btn google-btn">
+                            <!-- SVG icon for Google -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px" class="google-icon"><path fill="#4285F4" d="M44.5,20H24v8.5h11.7c-1.1,3.2-3.6,5.7-6.7,6.9l6.7,5.2c3.9-3.6,6.3-8.8,6.3-14.6C44.7,24.9,44.6,22.4,44.5,20z"/><path fill="#34A853" d="M24,44c5.9,0,10.8-1.9,14.4-5.1l-6.7-5.2c-2,1.3-4.6,2-7.7,2c-5.9,0-10.8-4-12.6-9.4l-7.2,5.6C8.9,39.7,15.9,44,24,44z"/><path fill="#FBBC05" d="M11.4,26.3c-0.5-1.3-0.8-2.7-0.8-4.3s0.3-3,0.8-4.3l-7.2-5.6C2.3,15.6,1,19.1,1,22.8s1.3,7.2,3.2,10.7L11.4,26.3z"/><path fill="#EA4335" d="M24,9.5c3.2,0,6.1,1.1,8.4,3.2l6.3-6.3C34.8,2.9,29.9,1,24,1c-8.1,0-15.1,4.3-19.2,10.7l7.2,5.6C13.2,13.5,18.1,9.5,24,9.5z"/><path fill="none" d="M0,0h48v48H0V0z"/></svg>
+                            Sign in with Google
+                        </button>
+                    </div>
+                    <!-- Section for account creation -->
+                    <div class="create-account">
+                        <p>New to Woodcraft? <a href="#">Create Account</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
+    <!-- Image credit at the bottom of the page -->
+    <div class="image-credit">
+        Photo by <a href="https://unsplash.com/@katishna?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Katie Azi</a> on <a href="https://unsplash.com/photos/a-laptop-computer-sitting-on-top-of-a-wooden-table-6bEc0U360LA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+    </div>
+</body>
+</html>
