@@ -1,0 +1,129 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Portfolio Section */
+#portfolio {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+/* Section Heading */
+#portfolio h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 3em;
+    color: #333;
+}
+
+/* Filter Buttons Container */
+#filter-buttons {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Filter Buttons Styles */
+.filter-btn {
+    background-color: #fff;
+    color: #333;
+    border: 2px solid #333;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Portfolio Items Grid */
+#portfolio-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Portfolio Item */
+.portfolio-item {
+    position: relative;
+    width: calc(25% - 20px);
+    margin: 10px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+}
+
+/* Portfolio Item Image */
+.portfolio-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Overlay Effect */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(51, 51, 51, 0.8);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+}
+
+/* Overlay Text */
+.overlay h3 {
+    color: #fff;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/* Hover Effects */
+.portfolio-item:hover .overlay {
+    opacity: 1;
+}
+
+.portfolio-item:hover {
+    transform: scale(1.05);
+}
+
+
+/* Responsive Layouts */
+@media (max-width: 992px) {
+    .portfolio-item {
+        width: calc(33.333% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-item {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 576px) {
+    .portfolio-item {
+        width: 100%;
+        margin: 10px 0;
+    }
+}

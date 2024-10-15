@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Filterable Portfolio</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <h1>My Portfolio</h1>
+        
+        <!-- Filter Buttons -->
+        <div id="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">Web Design</button>
+            <button class="filter-btn" data-filter="graphic">Graphic Design</button>
+            <button class="filter-btn" data-filter="app">App Development</button>
+        </div>
+
+        <!-- Portfolio Items -->
+        <div id="portfolio-items">
+            <!-- Portfolio Item 1 -->
+            <div class="portfolio-item" data-category="web">
+                <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Web Design Project 1">
+                <div class="overlay">
+                    <h3>Web Design Project 1</h3>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 2 -->
+            <div class="portfolio-item" data-category="graphic">
+                <img src="https://images.unsplash.com/photo-1726462987391-fbb6991a8248?q=80&w=2053&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Graphic Design Project 1">
+                <div class="overlay">
+                    <h3>Graphic Design Project 1</h3>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 3 -->
+            <div class="portfolio-item" data-category="app">
+                <img src="https://images.unsplash.com/photo-1617471346061-5d329ab9c574?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="App Development Project 1">
+                <div class="overlay">
+                    <h3>App Development Project 1</h3>
+                </div>
+            </div>
+
+            <!-- Add more portfolio items as needed -->
+            <!-- ... -->
+        </div>
+    </section>
+
+    <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
