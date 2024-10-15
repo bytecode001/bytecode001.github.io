@@ -1,0 +1,73 @@
+/* Basic reset to ensure consistent styling across browsers */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main accordion container */
+.accordion {
+  max-width: 600px;
+  margin: 50px auto;
+  border-radius: 8px;
+  overflow: hidden; /* To hide the content when collapsed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for modern look */
+}
+
+/* Styling for each accordion item */
+.accordion-item {
+  border-bottom: 1px solid #ddd; /* Separate each section with a border */
+}
+
+/* Header button styling */
+.accordion-header {
+  background-color: #2d2d2d; /* Dark background for contrast */
+  color: white;
+  width: 100%;
+  text-align: left; /* Align text to the left for readability */
+  padding: 20px;
+  font-size: 18px;
+  cursor: pointer; /* Indicates that the header is clickable */
+  border: none; /* Remove default button border */
+  outline: none; /* Remove outline when focused */
+  transition: background-color 0.3s ease; /* Smooth color change on hover */
+}
+
+/* Hover effect for header */
+.accordion-header:hover {
+  background-color: #444; /* Darken the header on hover */
+}
+
+/* Hidden content by default */
+.accordion-content {
+  max-height: 0; /* Hide content initially */
+  overflow: hidden; /* Prevent content from overflowing */
+  background-color: #f4f4f4;
+  transition: max-height 0.3s ease; /* Smooth transition for expanding/collapsing */
+  padding: 0 20px; /* Padding for content readability */
+}
+
+/* Paragraph inside the accordion content */
+.accordion-content p {
+  padding: 20px 0;
+  font-size: 16px;
+  color: #333; /* Text color for readability */
+}
+
+/* When the accordion item is active, show the content */
+.accordion-item.active .accordion-content {
+  max-height: 200px; /* Adjust as needed based on content */
+}
+
+/* Add animation to the content text */
+.accordion-content p {
+  opacity: 0; /* Initially hidden */
+  transform: translateY(-20px); /* Slide up effect */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+/* Show the content text when the item is active */
+.accordion-item.active .accordion-content p {
+  opacity: 1; /* Fully visible */
+  transform: translateY(0); /* Reset the slide effect */
+}
