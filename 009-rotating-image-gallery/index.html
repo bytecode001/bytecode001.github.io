@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rotating Image Gallery</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
 
+    <div class="image-container">
+      <span style="--i: 1">
+        <img src="https://picsum.photos/id/741/300/200" />
+      </span>
+      <span style="--i: 2">
+        <img src="https://picsum.photos/id/34/300/200" />
+      </span>
+      <span style="--i: 3">
+        <img src="https://picsum.photos/id/567/300/200" />
+      </span>
+      <span style="--i: 4">
+        <img src="https://picsum.photos/id/67/300/200" />
+      </span>
+      <span style="--i: 5">
+        <img src="https://picsum.photos/id/676/300/200" />
+      </span>
+      <span style="--i: 6">
+        <img src="https://picsum.photos/id/297/300/200" />
+      </span>
+      <span style="--i: 7">
+        <img src="https://picsum.photos/id/35/300/200" />
+      </span>
+      <span style="--i: 8">
+        <img src="https://picsum.photos/id/89/300/200" />
+      </span>
+      
+    </div>
+
+    <div class="btn-container">
+      <button class="btn" id="changeImageBtn">Change Images</button>
+        <button class="btn" id="prev">Prev</button>
+        <button class="btn" id="next">Next</button>      
+    </div>
+
+    <div class="credits">
+      <p>Original Project by <a href="https://www.udemy.com/course/html-css-javascript-projects-for-beginners" target="_blank">Sahand Ghavidel</a></p>
+      <p>Images by <a href="https://unsplash.com/" target="_blank">Unsplash</a></p>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
