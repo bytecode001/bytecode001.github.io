@@ -83,6 +83,7 @@ header {
   background-attachment: fixed; /* Enables Parallax scrolling */
   background-size: cover; /* Ensures the image covers the entire section */
   background-position: center; /* Centers the background image */
+  background-position-y: 0px;
   display: flex; /* Flexbox for centering content */
   align-items: center; /* Vertically center content */
   justify-content: center; /* Horizontally center content */
