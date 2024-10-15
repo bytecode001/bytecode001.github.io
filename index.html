@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Step Form</title>
+  <!-- Link to the external CSS file -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Main container for the form -->
+  <div class="form-container">
+    <!-- Begin form -->
+    <form id="multi-step-form">
+      
+      <!-- Form title -->
+      <h2>Multi Step Form</h2>
+
+      <!-- Step indicators (Circles for each step) -->
+      <div class="steps-container">
+        <!-- First step is active by default -->
+        <div class="step active-step">
+          <span class="step-number">1</span>
+          <p>Step 1</p>
+        </div>
+        <div class="step">
+          <span class="step-number">2</span>
+          <p>Step 2</p>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span>
+          <p>Step 3</p>
+        </div>
+        <div class="step">
+          <span class="step-number">4</span>
+          <p>Step 4</p>
+        </div>
+      </div>
+
+      <!-- Step 1 content -->
+      <div class="form-step form-step-active">
+        <div class="input-group">
+          <label for="email">Email Address*</label>
+          <input type="email" id="email" required>
+          <!-- Error message for email validation -->
+          <small class="error-message" id="email-error"></small>
+        </div>
+        <div class="input-group">
+          <label for="username">Username*</label>
+          <input type="text" id="username" required>
+        </div>
+        <!-- Next button to move to the next step -->
+        <button type="button" class="btn-next">Next</button>
+      </div>
+
+      <!-- Step 2 content -->
+      <div class="form-step">
+        <div class="input-group">
+          <label for="password">Password*</label>
+          <input type="password" id="password" required>
+          <!-- Error message for password validation -->
+          <small class="error-message" id="password-error"></small>
+        </div>
+        <div class="input-group">
+          <label for="confirm-password">Confirm Password*</label>
+          <input type="password" id="confirm-password" required>
+          <!-- Error message for password confirmation -->
+          <small class="error-message" id="confirm-password-error"></small>
+        </div>
+        <!-- Previous button to go back, Next button to proceed -->
+        <button type="button" class="btn-prev">Previous</button>
+        <button type="button" class="btn-next">Next</button>
+      </div>
+
+      <!-- Step 3 content -->
+      <div class="form-step">
+        <div class="input-group">
+          <label for="address">Address*</label>
+          <input type="text" id="address" required>
+        </div>
+        <div class="input-group">
+          <label for="city">City*</label>
+          <input type="text" id="city" required>
+        </div>
+        <!-- Previous and Next navigation buttons -->
+        <button type="button" class="btn-prev">Previous</button>
+        <button type="button" class="btn-next">Next</button>
+      </div>
+
+      <!-- Step 4: Review and Submit -->
+      <div class="form-step">
+        <h3>Review and Submit</h3>
+        <p><strong>Email:</strong> <span id="review-email"></span></p>
+        <p><strong>Username:</strong> <span id="review-username"></span></p>
+        <p><strong>Address:</strong> <span id="review-address"></span></p>
+        <p><strong>City:</strong> <span id="review-city"></span></p>
+        <!-- Previous button and Submit button -->
+        <button type="button" class="btn-prev">Previous</button>
+        <button type="submit" class="btn-submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <footer>
+    <p>Photo by <a href="https://unsplash.com/@vorosbenisop?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash" target="_blank">Benjamin Voros</a> on <a href="https://unsplash.com/photos/snow-mountain-under-stars-phIFdC6lA4E?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash" target="_blank">Unsplash</a></p>
+  </footer>
+
+  <!-- Link to the external JavaScript file -->
+  <script src="script.js"></script>
+</body>
+</html>
+
+  
+
+
+
