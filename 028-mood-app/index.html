@@ -1,1 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- The <meta> tag specifies the character encoding as UTF-8, 
+         which supports a wide range of characters including special symbols and emojis. -->
+    <meta charset="UTF-8">
 
+    <!-- The viewport meta tag ensures that the app is responsive, 
+         meaning it adapts properly on mobile devices and tablets. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- The <title> tag defines the title of the webpage. 
+         This is what appears in the browser tab and helps users identify the page. -->
+    <title>Mood Tracker - Track your daily mood</title>
+
+    <!-- Link to the external CSS file (styles.css) where the styling for this app is defined. -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Main container that holds all the content of the app. 
+         The container ensures that the layout is centered and provides consistent padding. -->
+    <div class="container">
+
+        <!-- The main heading of the app, which introduces the purpose of the page. 
+             It's styled to be prominent as it is the first thing the user sees. -->
+        <h1>Mood Tracker</h1>
+
+        <!-- A short paragraph describing the purpose of the app. 
+             It gives the user an idea of what they can do here. -->
+        <p>Track your daily mood</p>
+
+        <!-- A section with buttons representing different moods. 
+             Each button has an emoji and a data attribute 'data-mood' 
+             that identifies the mood for JavaScript functionality. -->
+        <div class="mood-selector">
+            <!-- Button for the "Happy" mood. The emoji is visually expressive, 
+                 and the data-mood attribute is used in the JavaScript to identify this mood. -->
+            <button class="mood-btn" data-mood="happy">😊</button>
+
+            <!-- Button for the "Sad" mood. Similar structure, different emoji and mood. -->
+            <button class="mood-btn" data-mood="sad">😢</button>
+
+            <!-- Button for the "Angry" mood. -->
+            <button class="mood-btn" data-mood="angry">😠</button>
+
+            <!-- Button for the "Tired" mood. -->
+            <button class="mood-btn" data-mood="tired">😴</button>
+
+            <!-- Button for the "Excited" mood. -->
+            <button class="mood-btn" data-mood="excited">😃</button>
+        </div>
+
+        <!-- A textarea where users can add notes about their day. 
+             This allows for personalized input, and the placeholder guides the user. -->
+        <textarea id="note" placeholder="Add a note..."></textarea>
+
+        <!-- A button that, when clicked, saves the selected mood and note. 
+             It interacts with the JavaScript functionality to store this data in localStorage. -->
+        <button id="save-btn">Save</button>
+
+        <!-- Subheading to display the mood selected for today. 
+             Initially empty, it will be dynamically updated by JavaScript. -->
+        <h2>Your mood today</h2>
+        <div id="today-mood"></div>
+
+        <!-- An additional message section that appears when the user saves their mood. 
+             It is hidden by default and shown via JavaScript after saving. -->
+        <div id="save-message" class="hidden"></div>
+
+    </div>
+    
+    <!-- Linking to the external JavaScript file (script.js), 
+         which adds the interactive features of the app. -->
+    <script src="script.js"></script>
+
+</body>
+</html>

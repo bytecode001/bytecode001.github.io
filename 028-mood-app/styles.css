@@ -1,0 +1,220 @@
+/* Base styling for the body element */
+body {
+  /* Font family for all text in the app, ensuring consistency and readability */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* Remove default margins and paddings applied by the browser */
+  margin: 0;
+  padding: 0;
+
+  /* Set the body height to cover the full viewport (100% of the screen height) */
+  height: 100vh;
+
+  /* Use Flexbox to center the container both vertically and horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Background properties for the animated gradient */
+  background-size: 400% 400%; /* Allows the gradient to "move" during the animation */
+  background-image: linear-gradient(135deg, #74ebd5, #acb6e5); /* Default gradient background */
+
+  /* Add continuous animation for the background */
+  animation: gradientAnimation 10s ease infinite;
+}
+
+/* Keyframes for continuous gradient animation */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%; /* Start position of the gradient */
+  }
+  50% {
+    background-position: 100% 50%; /* Move the gradient fully across the screen */
+  }
+  100% {
+    background-position: 0% 50%; /* Reset back to the start */
+  }
+}
+
+/* Styling the container that holds the app's content */
+.container {
+  /* Set the width to 90% of the viewport and limit the max width to 600px for responsiveness */
+  width: 90%;
+  max-width: 600px;
+
+  /* Background color of the container */
+  background-color: white;
+
+  /* Padding inside the container for spacing */
+  padding: 30px;
+
+  /* Rounded corners for the container */
+  border-radius: 10px;
+
+  /* Center the text inside the container */
+  text-align: center;
+
+  /* Add a subtle shadow to create a lifted effect */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Styling for the main heading (h1) */
+h1 {
+  /* Large font size to make the heading stand out */
+  font-size: 2.5em;
+
+  /* Margin below the heading for spacing */
+  margin-bottom: 10px;
+
+  /* Dark text color for the heading */
+  color: #333;
+}
+
+/* Styling for the subheading (p) */
+p {
+  /* Medium font size */
+  font-size: 1.2em;
+
+  /* Lighter text color to differentiate it from the heading */
+  color: #666;
+}
+
+/* Styling the mood button container */
+.mood-selector {
+  /* Add margin for spacing above and below the mood buttons */
+  margin: 20px 0;
+}
+
+/* Styling for the mood buttons */
+.mood-btn {
+  /* Large font size for the emoji-based buttons */
+  font-size: 2em;
+
+  /* Remove default button background and border */
+  background: none;
+  border: none;
+
+  /* Pointer cursor to indicate the buttons are clickable */
+  cursor: pointer;
+
+  /* Margin between buttons */
+  margin: 0 10px;
+
+  /* Add a smooth transform animation for hover effects */
+  transition: transform 0.2s;
+}
+
+/* Hover and selected state styling for the mood buttons */
+.mood-btn:hover,
+.mood-btn.selected {
+  /* Slightly enlarge the button when hovered or selected */
+  transform: scale(1.2);
+}
+
+/* Styling for the textarea where users add notes */
+textarea {
+  /* Full width of the container */
+  width: 100%;
+
+  /* Set a fixed height */
+  height: 100px;
+
+  /* Margin for spacing above and below the textarea */
+  margin: 20px 0;
+
+  /* Padding inside the textarea for text readability */
+  padding: 10px;
+
+  /* Set a base font size */
+  font-size: 1em;
+
+  /* Rounded corners for the textarea */
+  border-radius: 5px;
+
+  /* Light border around the textarea */
+  border: 1px solid #ccc;
+}
+
+/* Styling for the Save button */
+#save-btn {
+  /* Padding for the button to increase click area */
+  padding: 10px 30px;
+
+  /* Font size for the button text */
+  font-size: 1em;
+
+  /* Pointer cursor to indicate the button is clickable */
+  cursor: pointer;
+
+  /* Set a default background color */
+  background-color: #74ebd5;
+
+  /* Remove the border and add rounded corners */
+  border: none;
+  border-radius: 5px;
+
+  /* Add a transition effect for the background color */
+  transition: background-color 0.3s;
+}
+
+/* Hover state styling for the Save button */
+#save-btn:hover {
+  /* Change the background color when hovered */
+  background-color: #acb6e5;
+}
+
+/* Styling for the "Your mood today" heading (h2) */
+h2 {
+  /* Add margin to create space above the heading */
+  margin-top: 30px;
+
+  /* Dark text color for contrast */
+  color: #333;
+}
+
+/* Styling for the section where today's mood is displayed */
+#today-mood {
+  /* Add margin for spacing above the displayed mood */
+  margin-top: 20px;
+
+  /* Larger font size to make the displayed mood stand out */
+  font-size: 2em;
+}
+
+/* Styling for the message that appears after saving the mood */
+#save-message {
+  /* Add margin for spacing above the message */
+  margin-top: 20px;
+
+  /* Font size for the message text */
+  font-size: 1.2em;
+
+  /* Green color to indicate success */
+  color: green;
+}
+
+/* Hidden class to hide the message by default */
+.hidden {
+  display: none;
+}
+
+/* Styling for different mood-based background gradients */
+body.happy {
+  background-image: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+}
+
+body.sad {
+  background-image: linear-gradient(135deg, #74ebd5, #acb6e5);
+}
+
+body.angry {
+  background-image: linear-gradient(135deg, #ff758c, #ff7eb3);
+}
+
+body.tired {
+  background-image: linear-gradient(135deg, #757f9a, #d7dde8);
+}
+
+body.excited {
+  background-image: linear-gradient(135deg, #fce38a, #f38181);
+}
