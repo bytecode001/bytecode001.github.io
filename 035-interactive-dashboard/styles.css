@@ -1,0 +1,145 @@
+/* Reset default browser styles for consistency */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Define harmonious color palette using CSS variables */
+:root {
+  --primary-color: #4A90E2;       /* Blue shade */
+  --secondary-color: #50E3C2;     /* Teal shade */
+  --background-color: #F5F7FA;    /* Light gray */
+  --text-color: #4A4A4A;          /* Dark gray */
+  --white-color: #FFFFFF;         /* Pure white */
+}
+
+/* Base body styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Dashboard layout styling */
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar styling */
+.sidebar {
+  width: 250px;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 20px;
+  transition: width 0.3s;
+}
+
+.sidebar .logo {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+}
+
+.sidebar ul li {
+  margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+  color: var(--white-color);
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+/* Sidebar link hover effect */
+.sidebar ul li a:hover {
+  color: var(--secondary-color);
+  padding-left: 10px;
+}
+
+/* Main content area styling */
+.main-content {
+  flex: 1;
+  padding: 40px;
+}
+
+/* Header section styling */
+header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 18px;
+  color: var(--text-color);
+}
+
+/* Widgets section layout */
+.widgets {
+  display: flex;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+/* Individual widget styling */
+.widget {
+  background-color: var(--white-color);
+  padding: 20px;
+  border-radius: 8px;
+  flex: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.widget h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.widget p {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Widget hover effect */
+.widget:hover {
+  transform: translateY(-5px);
+}
+
+/* Charts section layout */
+.charts {
+  display: flex;
+  margin-top: 40px;
+  gap: 20px;
+}
+
+/* Chart container styling */
+.chart-container {
+  background-color: var(--white-color);
+  padding: 20px;
+  border-radius: 8px;
+  flex: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .widgets, .charts {
+      flex-direction: column;
+  }
+
+  .sidebar {
+      width: 60px;
+  }
+
+  .sidebar .logo,
+  .sidebar ul li a {
+      display: none;
+  }
+}

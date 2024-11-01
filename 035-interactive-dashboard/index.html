@@ -1,1 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Dashboard</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Include Chart.js library from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Dashboard Container -->
+    <div class="dashboard">
+        <!-- Navigation Sidebar -->
+        <nav class="sidebar">
+            <h2 class="logo">Dashboard</h2>
+            <ul>
+                <li><a href="#">Overview</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </nav>
 
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Header Section -->
+            <header>
+                <h1>Welcome, User</h1>
+                <p>Here are your latest stats.</p>
+            </header>
+
+            <!-- Widgets Section -->
+            <section class="widgets">
+                <!-- Widget 1 -->
+                <div class="widget">
+                    <h3>Total Sales</h3>
+                    <p>1,234</p>
+                </div>
+                <!-- Widget 2 -->
+                <div class="widget">
+                    <h3>New Users</h3>
+                    <p>567</p>
+                </div>
+                <!-- Widget 3 -->
+                <div class="widget">
+                    <h3>Active Sessions</h3>
+                    <p>89</p>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="charts">
+                <!-- Line Chart Container -->
+                <div class="chart-container">
+                    <canvas id="lineChart"></canvas>
+                </div>
+                <!-- Bar Chart Container -->
+                <div class="chart-container">
+                    <canvas id="barChart"></canvas>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
