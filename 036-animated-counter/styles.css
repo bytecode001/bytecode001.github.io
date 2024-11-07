@@ -1,0 +1,82 @@
+/* Style for the body of the page */
+body {
+  /* Light and pleasant background color */
+  background-color: #f0f4f8;
+  /* Use Flexbox to center content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Set height to viewport height to occupy the full window */
+  height: 100vh;
+  /* Remove default margins */
+  margin: 0;
+  /* Use a sans-serif font for a modern look */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Style for the counter container */
+.counter-container {
+  /* White background for contrast */
+  background-color: #ffffff;
+  /* Internal padding for spacing */
+  padding: 40px 60px;
+  /* Rounded corners for a softer design */
+  border-radius: 12px;
+  /* Light shadow for depth */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  /* Center the text */
+  text-align: center;
+}
+
+/* Style for the counter number */
+.counter {
+  /* Large font size for visibility */
+  font-size: 80px;
+  /* Bold text */
+  font-weight: bold;
+  /* Initial text color */
+  color: #3a86ff;
+  /* Relative positioning for pseudo-elements */
+  position: relative;
+  /* Inline-block display to manage dimensions and margins */
+  display: inline-block;
+  /* Transition for color change */
+  transition: color 0.3s ease;
+}
+
+/* Style applied when the 'animate' class is added */
+.counter.animate {
+  /* Change text color for animation */
+  color: #8338ec;
+}
+
+/* Style for the plus sign that appears after the number */
+.counter::after {
+  /* Add content: the '+' sign */
+  content: '+';
+  /* Font size for the plus sign */
+  font-size: 40px;
+  /* Absolute positioning relative to the counter */
+  position: absolute;
+  /* Position at the top-right of the number */
+  top: 10px;
+  right: -30px;
+  /* Initial color of the plus sign */
+  color: #3a86ff;
+  /* Initial opacity set to zero for animation */
+  opacity: 0;
+  /* Initial translation for sliding effect */
+  transform: translateX(10px);
+  /* Transitions for opacity and transformation */
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* Animation style for the plus sign when 'animate' class is present */
+.counter.animate::after {
+  /* Full opacity to make the plus sign visible */
+  opacity: 1;
+  /* Reset translation to bring the plus sign into position */
+  transform: translateX(0);
+  /* Change color of the plus sign for animation */
+  color: #8338ec;
+}
