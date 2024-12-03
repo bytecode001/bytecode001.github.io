@@ -1,0 +1,115 @@
+/* Global styles */
+body {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  font-family: 'Arial', sans-serif; /* Set default font family */
+  background: linear-gradient(135deg, #f5af19, #f12711); /* Apply gradient background */
+  color: #2d3436; /* Set text color */
+  display: flex; /* Use Flexbox for layout */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  min-height: 100vh; /* Set minimum height to viewport height */
+  text-align: center; /* Center-align text */
+}
+
+/* Main container using Flexbox */
+.main-container {
+  display: flex; /* Use Flexbox */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+}
+
+/* Title styling */
+.title {
+  font-size: 48px; /* Set font size for the title */
+  color: #fff; /* Set text color to white */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Add text shadow for readability */
+}
+
+/* Description styling */
+.description {
+  font-size: 18px; /* Set font size for the description */
+  color: #fff; /* Set text color to white */
+  margin-bottom: 30px; /* Add space below the description */
+}
+
+/* Search container */
+.search-container {
+  position: relative; /* Position relative for absolute positioning inside */
+  width: 300px; /* Set fixed width */
+  display: flex; /* Use Flexbox */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+}
+
+/* Style the search input field */
+#search-input {
+  width: 100%; /* Set width to 100% of container */
+  padding: 12px 20px; /* Add padding inside the input */
+  font-size: 16px; /* Set font size */
+  border: 2px solid #ddd; /* Add border */
+  border-radius: 25px; /* Round the corners */
+  transition: border 0.3s ease; /* Add transition effect on border */
+}
+
+/* Change border color on focus */
+#search-input:focus {
+  outline: none; /* Remove default outline */
+  border-color: #6c5ce7; /* Change border color when focused */
+}
+
+/* Style the message display area */
+.message-display {
+  font-size: 24px; /* Set font size */
+  margin-top: 20px; /* Add space above */
+  color: #fff; /* Set text color to white */
+  min-height: 48px; /* Reserve space for the message/emoji */
+  display: flex; /* Use Flexbox */
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+}
+
+/* Style the suggestions dropdown */
+.suggestions {
+  position: absolute; /* Position absolutely within the container */
+  top: 100%; /* Position below the input field */
+  left: 0; /* Align to the left */
+  width: 100%; /* Set width to match the input */
+  border-radius: 0 0 25px 25px; /* Round bottom corners */
+  border: 2px solid #ddd; /* Add border */
+  border-top: none; /* Remove top border to connect with input field */
+  background-color: #fff; /* Set background color */
+  max-height: 200px; /* Set maximum height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Add shadow effect */
+  opacity: 0; /* Hide by default */
+  visibility: hidden; /* Hide by default */
+  transform: translateY(-10px); /* Move up slightly when hidden */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Add transition effects */
+  z-index: 1; /* Ensure it's above other elements */
+}
+
+/* Show suggestions when active */
+.suggestions.active {
+  opacity: 1; /* Make visible */
+  visibility: visible; /* Make visible */
+  transform: translateY(0); /* Reset position */
+}
+
+/* Style each suggestion item */
+.suggestion-item {
+  padding: 10px 20px; /* Add padding */
+  cursor: pointer; /* Change cursor on hover */
+  transition: background-color 0.2s ease; /* Add transition effect */
+}
+
+/* Hover effect for suggestion items */
+.suggestion-item:hover {
+  background-color: #f1f1f1; /* Change background color on hover */
+}
+
+/* Style for "No suggestions" message */
+.no-suggestions {
+  padding: 10px 20px; /* Add padding */
+  color: #888; /* Set text color */
+}

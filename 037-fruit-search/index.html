@@ -1,1 +1,32 @@
+<!DOCTYPE html> <!-- Define the document type as HTML5 -->
+<html lang="en"> <!-- Set the language attribute to English -->
+<head>
+    <meta charset="UTF-8"> <!-- Specify character encoding -->
+    <title>Fruit Search 🍎🍌</title> <!-- Set the title of the page -->
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
+    <!-- Main container using Flexbox -->
+    <div class="main-container">
+        <!-- Page title with emojis -->
+        <h1 class="title">Fruit Search 🍎🍌</h1>
+        <!-- Brief description with emojis -->
+        <p class="description">Type to find your favorite fruits! 🍇🍉🍓</p>
+
+        <!-- Search container -->
+        <div class="search-container">
+            <!-- Search input field -->
+            <input type="text" id="search-input" placeholder="Search fruits...">            
+            <!-- Suggestions dropdown -->
+            <div id="suggestions" class="suggestions"></div>
+        </div>
+        <!-- Message display area for emoji or messages -->
+        <div id="message-display" class="message-display"></div>
+    </div>
+
+    <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
