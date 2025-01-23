@@ -1,1 +1,41 @@
-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Ensures the layout scales correctly on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Progressive Loading</title>
+    
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    
+    <div class="container">
+      <!-- Absolute full-screen background image -->
+      <div class="background-image"></div>
+      
+      <!-- Progress ring + text container -->
+      <div class="progress-container">
+        <div class="progress-ring">
+          <!-- The SVG defines two circles:
+               1) One for the background (light stroke).
+               2) One for the progressive fill (white stroke). -->
+          <svg class="ring" viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="54"></circle>
+            <circle class="ring-fill" cx="60" cy="60" r="54"></circle>
+          </svg>
+          <!-- Displays the current loading percentage in the center of the ring -->
+          <div class="percent-display">0%</div>
+        </div>
+        
+        <!-- A small text message under the ring -->
+        <p class="loading-message">Loading in progress...</p>
+      </div>
+    </div>
+    
+    <!-- Link to the JS file (at the end for best practice) -->
+    <script src="script.js"></script>
+  </body>
+</html>
