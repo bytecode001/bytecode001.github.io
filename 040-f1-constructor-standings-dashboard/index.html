@@ -1,1 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>F1 Constructor Standings Dashboard</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <div class="dashboard-grid">
+    <header>
+      <h1>F1 Constructor Standings Dashboard</h1>
+      <div class="controls">
+        <label for="seasonSelect">Select Season:</label>
+        <select id="seasonSelect"></select>
+      </div>
+    </header>
+    <main>
+      <div id="chart"></div>
+      <div id="summaryTable"></div>
+    </main>
+    <aside>
+      <div id="legend"></div>
+    </aside>
+    <footer>
+        <p>
+         Powered by D3.js • Visualization by Francesco Saviano<br>
+         Data &copy; <a href="https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020" target="_blank" rel="noopener">Rohan Rao (Kaggle: vopani)</a> – Based on the <a href="https://ergast.com/mrd/" target="_blank" rel="noopener">Ergast Developer API</a>
+        </p>
+    </footer>
 
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

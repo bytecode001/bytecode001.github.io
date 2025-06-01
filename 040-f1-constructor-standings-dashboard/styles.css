@@ -1,0 +1,136 @@
+body {
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  background: #101421;
+  color: #f1f1f1;
+  margin: 0;
+  padding: 0;
+}
+
+/* Layout grid for dashboard */
+.dashboard-grid {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "main aside"
+    "footer footer";
+  grid-template-columns: 2fr 300px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  gap: 28px 36px;
+  padding: 28px 10px 10px 10px;
+}
+
+header { grid-area: header; text-align: center; }
+main   { grid-area: main; }
+aside  { grid-area: aside; }
+footer { grid-area: footer; text-align: center; color: #aaa; font-size: 0.98rem; margin-top: 10px; }
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+label { margin-right: 10px; }
+select {
+  padding: 5px 15px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  background: #22273a;
+  color: #f1f1f1;
+}
+
+#chart {
+  margin-bottom: 30px;
+  background: #181d2a;
+  border-radius: 15px;
+  padding: 12px 6px 12px 18px;
+  min-height: 400px;
+  overflow-x: auto;
+}
+#summaryTable {
+  margin-bottom: 22px;
+}
+#summaryTable table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #21263a;
+  border-radius: 10px;
+  overflow: hidden;
+}
+#summaryTable th, #summaryTable td {
+  padding: 8px 6px;
+  text-align: center;
+}
+#summaryTable th {
+  background: #303657;
+  color: #ffda00;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+#summaryTable tr:nth-child(even) td { background: #232a41; }
+
+#legend {
+  background: #181d2a;
+  border-radius: 15px;
+  padding: 18px 12px;
+  margin-top: 10px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+}
+.legend-color {
+  width: 20px; height: 20px; border-radius: 50%;
+  display: inline-block;
+  margin-right: 12px;
+  border: 2px solid #22273a;
+}
+
+@media (max-width: 850px) {
+  .dashboard-grid {
+    grid-template-areas:
+      "header"
+      "main"
+      "aside"
+      "footer";
+    grid-template-columns: 1fr;
+    gap: 18px 0;
+    padding: 18px 4px 4px 4px;
+  }
+  aside {
+    margin-bottom: 24px;
+    margin-top: 0;
+  }
+  #legend {
+    margin-top: 0;
+  }
+}
+
+/* Tooltip style for chart */
+.chart-tooltip {
+  pointer-events: none;
+  z-index: 1000;
+  position: absolute;
+  background: #232a41;
+  color: #fff;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px #0005;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.team-badge {
+  display: inline-block;
+  width: 15px; height: 15px;
+  margin-right: 7px;
+  border-radius: 100%;
+  vertical-align: middle;
+  border: 2px solid #232a41;
+}
