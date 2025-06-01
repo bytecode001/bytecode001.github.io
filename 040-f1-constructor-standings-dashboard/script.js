@@ -1,4 +1,4 @@
-// ---- Official HEX color mapping for F1 constructors (add others if needed) ----
+// --- Official HEX color mapping for F1 constructors (expandable) ---
 const TEAM_COLORS = {
   "Red Bull":        "#1e41ff",
   "Red Bull Racing": "#1e41ff",
@@ -55,27 +55,24 @@ const TEAM_COLORS = {
   "Porsche":         "#c0c0c0"
 };
 
-// ---- Fallback palette HEX for rare/unknown teams (will never duplicate with official) ----
+// --- Fallback palette HEX for rare/unknown teams (never duplicates official) ---
 const PALETTE = [
   "#ff9900", "#a259c2", "#f06292", "#4dd0e1", "#8bc34a", "#ffe600", "#8d5524", "#e17055",
   "#1abc9c", "#2ecc71", "#f1c40f", "#34495e", "#9b59b6", "#c0392b", "#2980b9", "#d35400"
 ];
 
-// --- Assign a unique color to each team (official first, then fallback palette) ---
+// Assign unique color to each team (official first, then palette)
 function assignColorsToTeams(teamNames) {
   let mapping = {};
   let usedColors = new Set();
   let paletteIdx = 0;
 
-  // Official HEX color if present
   teamNames.forEach(team => {
     if (TEAM_COLORS[team]) {
       mapping[team] = TEAM_COLORS[team];
       usedColors.add(TEAM_COLORS[team]);
     }
   });
-
-  // Assign remaining teams a palette color, skipping duplicates
   teamNames.forEach(team => {
     if (!mapping[team]) {
       while (usedColors.has(PALETTE[paletteIdx]) && paletteIdx < PALETTE.length) paletteIdx++;
@@ -84,11 +81,10 @@ function assignColorsToTeams(teamNames) {
       paletteIdx++;
     }
   });
-
   return mapping;
 }
 
-// --- Load all required CSV data and initialize dashboard ---
+// --- Load CSVs and initialize dashboard ---
 Promise.all([
   d3.csv('data/seasons.csv'),
   d3.csv('data/races.csv'),
@@ -110,9 +106,8 @@ Promise.all([
   });
 });
 
-// --- Main dashboard rendering for a selected season ---
+// --- Main rendering for selected season ---
 function renderDashboard(season, races, constructors, standings) {
-  // Filter races and standings for the chosen season
   const seasonRaces = races.filter(r => r.year === season)
     .sort((a, b) => +a.round - +b.round);
   const raceIds = seasonRaces.map(r => r.raceId);
@@ -125,7 +120,7 @@ function renderDashboard(season, races, constructors, standings) {
   seasonStandings.forEach(s => teamsSet.add(constructorMap[s.constructorId] || s.constructorId));
   const teamNames = Array.from(teamsSet);
 
-  // Assign consistent colors for this season
+  // Assign colors
   const teamColors = assignColorsToTeams(teamNames);
 
   // Build data structure: {team: [{round, points}]}
@@ -140,37 +135,20 @@ function renderDashboard(season, races, constructors, standings) {
     });
   });
 
-  // Fill 0s for races without points and calculate cumulative points
+  // For each team, make sure we have data for every race in order, using the "points" as is (they are already cumulative)
   Object.keys(teamData).forEach(team => {
     teamData[team] = seasonRaces.map(race => {
       const data = teamData[team].find(d => d.raceId === race.raceId);
       return { round: +race.round, points: data ? data.points : 0 };
     });
-    // Cumulative sum over rounds
     teamData[team].sort((a, b) => a.round - b.round);
-    for (let i = 1; i < teamData[team].length; i++) {
-      if (teamData[team][i].points < teamData[team][i-1].points)
-        teamData[team][i].points += teamData[team][i-1].points;
-    }
   });
 
   drawLineChart(teamData, seasonRaces, season, teamColors);
-  drawLegend(teamNames, teamColors);
   drawSummaryTable(teamData, teamColors);
 }
 
-// --- Draw legend for all teams with correct colors ---
-function drawLegend(teamNames, teamColors) {
-  const legendDiv = d3.select("#legend");
-  legendDiv.html("");
-  teamNames.forEach(team => {
-    legendDiv.append("div")
-      .attr("class", "legend-item")
-      .html(`<span class="legend-color" style="background:${teamColors[team]}"></span>${team}`);
-  });
-}
-
-// --- Draw summary table with team badges and colors ---
+// --- Draw summary table with color badge, slight highlight animation on hover ---
 function drawSummaryTable(teamData, teamColors) {
   const summary = [];
   Object.keys(teamData).forEach(team => {
@@ -193,7 +171,7 @@ function drawSummaryTable(teamData, teamColors) {
   d3.select("#summaryTable").html(tableHTML);
 }
 
-// --- Draw the D3.js line chart for team points evolution ---
+// --- D3.js animated line chart for team points evolution ---
 function drawLineChart(teamData, races, season, teamColors) {
   d3.select("#chart").html(""); // reset
 
@@ -241,32 +219,47 @@ function drawLineChart(teamData, races, season, teamColors) {
     .attr("class", "chart-tooltip")
     .style("opacity", 0);
 
-  // Draw lines and circles for each team
-  Object.keys(teamData).forEach(team => {
+  // --- Animation: draw lines and dots with transition ---
+  Object.keys(teamData).forEach((team, idx) => {
     const color = teamColors[team];
+    const points = teamData[team];
 
     const line = d3.line()
       .x((d, i) => x(d.round))
       .y(d => y(d.points))
       .curve(d3.curveMonotoneX);
 
-    svg.append("path")
-      .datum(teamData[team])
+    // Add animated line
+    const path = svg.append("path")
+      .datum(points)
       .attr("fill", "none")
       .attr("stroke", color)
       .attr("stroke-width", 3)
       .attr("opacity", 0.88)
       .attr("d", line);
 
+    // Animate line drawing
+    const length = path.node().getTotalLength();
+    path
+      .attr("stroke-dasharray", length + " " + length)
+      .attr("stroke-dashoffset", length)
+      .transition()
+      .duration(1200)
+      .delay(idx * 120)
+      .ease(d3.easeCubic)
+      .attr("stroke-dashoffset", 0);
+
+    // Animated dots
     svg.selectAll(`.dot-${team.replace(/\s/g, "")}`)
-      .data(teamData[team])
+      .data(points)
       .enter()
       .append("circle")
       .attr("class", `dot dot-${team.replace(/\s/g, "")}`)
       .attr("cx", d => x(d.round))
-      .attr("cy", d => y(d.points))
+      .attr("cy", d => y(0))
       .attr("r", 5)
       .attr("fill", color)
+      .attr("opacity", 0)
       .on("mouseover", function(event, d) {
         tooltip.transition().duration(120).style("opacity", 1);
         tooltip.html(`<strong>${team}</strong><br>Round: ${d.round}<br>Points: ${d.points}`)
@@ -275,6 +268,12 @@ function drawLineChart(teamData, races, season, teamColors) {
       })
       .on("mouseout", function() {
         tooltip.transition().duration(200).style("opacity", 0);
-      });
+      })
+      // Animate appearance and upward movement
+      .transition()
+      .duration(600)
+      .delay((d, i) => 100 + i * 30 + idx * 100)
+      .attr("cy", d => y(d.points))
+      .attr("opacity", 1);
   });
 }

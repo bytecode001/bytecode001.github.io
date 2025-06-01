@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!--
+    F1 Constructor Standings Dashboard
+    Visualization by Francesco Saviano
+    Dataset: Formula 1 World Championship (1950-2020) – Rohan Rao (Kaggle: vopani), based on Ergast API
+    Licensed under CC BY 4.0
+  -->
   <meta charset="UTF-8">
   <title>F1 Constructor Standings Dashboard</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Explore F1 constructor standings with an interactive dashboard. Data-driven, beginner-friendly, powered by D3.js and ChatGPT.">
   <link rel="stylesheet" href="styles.css">
   <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -20,16 +27,12 @@
       <div id="chart"></div>
       <div id="summaryTable"></div>
     </main>
-    <aside>
-      <div id="legend"></div>
-    </aside>
     <footer>
-        <p>
-         Powered by D3.js • Visualization by Francesco Saviano<br>
-         Data &copy; <a href="https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020" target="_blank" rel="noopener">Rohan Rao (Kaggle: vopani)</a> – Based on the <a href="https://ergast.com/mrd/" target="_blank" rel="noopener">Ergast Developer API</a>
-        </p>
+      <p>
+        Powered by D3.js • Visualization by Francesco Saviano<br>
+        Data &copy; <a href="https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020" target="_blank" rel="noopener">Rohan Rao (Kaggle: vopani)</a> – Based on the <a href="https://ergast.com/mrd/" target="_blank" rel="noopener">Ergast Developer API</a>
+      </p>
     </footer>
-
   </div>
   <script src="script.js"></script>
 </body>

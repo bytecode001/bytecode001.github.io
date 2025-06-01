@@ -6,24 +6,21 @@ body {
   padding: 0;
 }
 
-/* Layout grid for dashboard */
 .dashboard-grid {
   display: grid;
   grid-template-areas:
-    "header header"
-    "main aside"
-    "footer footer";
-  grid-template-columns: 2fr 300px;
-  max-width: 1200px;
+    "header"
+    "main"
+    "footer";
+  max-width: 1100px;
   margin: 0 auto;
   min-height: 100vh;
-  gap: 28px 36px;
+  gap: 24px 0;
   padding: 28px 10px 10px 10px;
 }
 
 header { grid-area: header; text-align: center; }
 main   { grid-area: main; }
-aside  { grid-area: aside; }
 footer { grid-area: footer; text-align: center; color: #aaa; font-size: 0.98rem; margin-top: 10px; }
 
 .controls {
@@ -46,24 +43,36 @@ select {
 #chart {
   margin-bottom: 30px;
   background: #181d2a;
-  border-radius: 15px;
-  padding: 12px 6px 12px 18px;
+  border-radius: 20px;
+  padding: 18px 12px 22px 24px;
   min-height: 400px;
   overflow-x: auto;
+  box-shadow: 0 6px 26px #0004;
+  transition: box-shadow 0.3s;
 }
+#chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 #summaryTable {
   margin-bottom: 22px;
 }
 #summaryTable table {
   width: 100%;
   border-collapse: collapse;
-  background: #21263a;
-  border-radius: 10px;
+  background: #232a41;
+  border-radius: 14px;
   overflow: hidden;
+  box-shadow: 0 2px 16px #0002;
+  transition: box-shadow 0.3s;
 }
 #summaryTable th, #summaryTable td {
-  padding: 8px 6px;
+  padding: 11px 6px;
   text-align: center;
+  font-size: 1.07rem;
+  transition: background 0.18s;
 }
 #summaryTable th {
   background: #303657;
@@ -71,48 +80,35 @@ select {
   font-weight: 600;
   letter-spacing: 0.04em;
 }
-#summaryTable tr:nth-child(even) td { background: #232a41; }
+#summaryTable tr:nth-child(even) td { background: #263058; }
 
-#legend {
-  background: #181d2a;
-  border-radius: 15px;
-  padding: 18px 12px;
-  margin-top: 10px;
+#summaryTable tr {
+  transition: background 0.18s;
 }
-.legend-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  font-size: 1.05rem;
+#summaryTable tr:hover td {
+  background: #373fa0 !important;
 }
-.legend-color {
-  width: 20px; height: 20px; border-radius: 50%;
+
+.team-badge {
   display: inline-block;
-  margin-right: 12px;
-  border: 2px solid #22273a;
+  width: 15px; height: 15px;
+  margin-right: 7px;
+  border-radius: 100%;
+  vertical-align: middle;
+  border: 2px solid #232a41;
+  transition: border 0.18s, box-shadow 0.18s;
+}
+#summaryTable tr:hover .team-badge {
+  border: 2px solid #ffda00;
+  box-shadow: 0 0 7px #ffda0070;
 }
 
-@media (max-width: 850px) {
-  .dashboard-grid {
-    grid-template-areas:
-      "header"
-      "main"
-      "aside"
-      "footer";
-    grid-template-columns: 1fr;
-    gap: 18px 0;
-    padding: 18px 4px 4px 4px;
-  }
-  aside {
-    margin-bottom: 24px;
-    margin-top: 0;
-  }
-  #legend {
-    margin-top: 0;
-  }
+@media (max-width: 900px) {
+  .dashboard-grid { padding: 14px 2px 4px 2px; }
+  #chart { padding: 8px 2px 10px 6px; min-height: 320px; }
+  #summaryTable th, #summaryTable td { padding: 8px 4px; }
 }
 
-/* Tooltip style for chart */
 .chart-tooltip {
   pointer-events: none;
   z-index: 1000;
@@ -125,12 +121,4 @@ select {
   box-shadow: 0 2px 8px #0005;
   opacity: 0;
   transition: opacity 0.2s;
-}
-.team-badge {
-  display: inline-block;
-  width: 15px; height: 15px;
-  margin-right: 7px;
-  border-radius: 100%;
-  vertical-align: middle;
-  border: 2px solid #232a41;
 }
