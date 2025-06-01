@@ -171,18 +171,23 @@ function drawSummaryTable(teamData, teamColors) {
   d3.select("#summaryTable").html(tableHTML);
 }
 
-// --- D3.js animated line chart for team points evolution ---
+// --- D3.js animated, fully responsive line chart ---
 function drawLineChart(teamData, races, season, teamColors) {
   d3.select("#chart").html(""); // reset
 
+  // Responsive: use a fixed viewBox and scale to width 100%
   const margin = { top: 28, right: 24, bottom: 40, left: 58 },
-        width = 820 - margin.left - margin.right,
-        height = 380 - margin.top - margin.bottom;
+        chartWidth = 820,
+        chartHeight = 380,
+        width = chartWidth - margin.left - margin.right,
+        height = chartHeight - margin.top - margin.bottom;
 
   const svg = d3.select("#chart")
     .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("viewBox", `0 0 ${chartWidth} ${chartHeight}`)
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .style("width", "100%")
+    .style("height", "auto")
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
