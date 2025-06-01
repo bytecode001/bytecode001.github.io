@@ -219,6 +219,7 @@ team_colors = {
 
 # Inizializza l'app Dash
 app = dash.Dash(__name__)
+server = app.server  
 
 # Layout dell'app
 app.layout = html.Div([
