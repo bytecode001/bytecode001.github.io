@@ -17,11 +17,11 @@ class SortingVisualizer {
         this.isRunning = false;
         this.isPaused = false;
         this.isSorted = false;
+        this.shouldStop = false;
         
         // Statistics
         this.comparisons = 0;
         this.swaps = 0;
-        this.startTime = 0;
         
         // Algorithm definitions with metadata
         this.algorithms = {
@@ -66,8 +66,22 @@ class SortingVisualizer {
     init() {
         this.cacheDOMElements();
         this.attachEventListeners();
+        this.syncSliderValues();
         this.generateRandomArray();
         this.updateAlgorithmInfo();
+    }
+    
+    /**
+     * Sync slider values with their display
+     */
+    syncSliderValues() {
+        // Sync array size
+        this.arraySize = parseInt(this.arraySizeSlider.value);
+        this.sizeValue.textContent = this.arraySize;
+        
+        // Sync animation speed
+        this.animationSpeed = parseInt(this.speedSlider.value);
+        this.speedValue.textContent = this.animationSpeed;
     }
     
     /**
@@ -85,7 +99,6 @@ class SortingVisualizer {
         this.speedValue = document.getElementById('speed-value');
         this.comparisonsElement = document.getElementById('comparisons');
         this.swapsElement = document.getElementById('swaps');
-        this.timeElement = document.getElementById('time');
         this.complexityElement = document.getElementById('complexity');
         this.algorithmName = document.getElementById('algorithm-name');
         this.algorithmDescription = document.getElementById('algorithm-description');
@@ -117,7 +130,22 @@ class SortingVisualizer {
      * Generate a new random array
      */
     generateRandomArray() {
-        if (this.isRunning) return;
+        if (this.isRunning && !this.isPaused) return;
+        
+        // If generating during pause, stop the current sorting
+        if (this.isRunning && this.isPaused) {
+            this.shouldStop = true;
+            this.isRunning = false;
+            this.isPaused = false;
+            this.pauseBtn.disabled = true;
+            this.pauseBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg> Pause';
+        }
+        
+        // Reset all visual states before generating new array
+        const bars = this.barsContainer.children;
+        for (let i = 0; i < bars.length; i++) {
+            bars[i].classList.remove('comparing', 'sorted', 'pivot', 'selected');
+        }
         
         this.array = [];
         for (let i = 0; i < this.arraySize; i++) {
@@ -167,9 +195,8 @@ class SortingVisualizer {
         
         this.isRunning = true;
         this.isPaused = false;
+        this.shouldStop = false;
         this.resetStats();
-        this.startTime = Date.now();
-        this.updateTimer();
         
         // Update UI state
         this.sortBtn.disabled = true;
@@ -201,12 +228,12 @@ class SortingVisualizer {
                     break;
             }
             
-            // Mark all bars as sorted with animation
-            await this.markAllSorted();
-            
-            // Array is now sorted
-            this.isSorted = true;
-            this.sortBtn.disabled = true;
+            // Only mark as sorted if still running (not interrupted)
+            if (this.isRunning && !this.shouldStop) {
+                await this.markAllSorted();
+                this.isSorted = true;
+                this.sortBtn.disabled = true;
+            }
             
         } catch (error) {
             console.error('Sorting interrupted:', error);
@@ -223,6 +250,10 @@ class SortingVisualizer {
      */
     togglePause() {
         this.isPaused = !this.isPaused;
+        
+        // Enable generate button during pause
+        this.generateBtn.disabled = !this.isPaused;
+        
         this.pauseBtn.innerHTML = this.isPaused ? 
             '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Resume' : 
             '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg> Pause';
@@ -232,9 +263,15 @@ class SortingVisualizer {
      * Delay function that respects pause state
      */
     async delay() {
-        while (this.isPaused) {
+        while (this.isPaused && !this.shouldStop) {
             await new Promise(resolve => setTimeout(resolve, 100));
         }
+        
+        // Check if should stop
+        if (this.shouldStop) {
+            throw new Error('Sorting stopped');
+        }
+        
         return new Promise(resolve => setTimeout(resolve, this.animationSpeed));
     }
     
@@ -264,6 +301,11 @@ class SortingVisualizer {
      * Compare two elements with animation
      */
     async compare(i, j) {
+        // Check if should stop
+        if (this.shouldStop) {
+            throw new Error('Sorting stopped');
+        }
+        
         const bars = this.barsContainer.children;
         
         // Highlight bars being compared
@@ -599,17 +641,6 @@ class SortingVisualizer {
     updateStats() {
         this.comparisonsElement.textContent = this.comparisons;
         this.swapsElement.textContent = this.swaps;
-    }
-    
-    /**
-     * Update timer display
-     */
-    updateTimer() {
-        if (this.isRunning) {
-            const elapsed = (Date.now() - this.startTime) / 1000;
-            this.timeElement.textContent = elapsed.toFixed(1) + 's';
-            requestAnimationFrame(() => this.updateTimer());
-        }
     }
     
     /**
