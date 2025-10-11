@@ -1,10 +1,10 @@
 /* ============================================================
-   Country Explorer — app.js (full, with robust fade-in/out)
-   ------------------------------------------------------------
+   Country Explorer — app.js
    - CSV load via PapaParse
    - Filters (search, continent, language, population, GDP pc)
    - Sort chips with null-last comparator
-   - Dialog animations: open (.open), close (.closing) with RAF/reflow
+   - Flags via FlagCDN (PNG) with emoji fallback
+   - Dialog animations: .open (fade-in) / .closing (fade-out)
    ============================================================ */
 
 const CSV_PATH = "countries_dataset_2025_v1_0.csv";
@@ -14,6 +14,30 @@ const GDP_ALIASES = [
   "gdp_usd_per_capita",
   "gdp_per_capita_current_usd"
 ];
+
+/* ----- Flag rendering: robust on Chrome with PNG from FlagCDN ----- */
+const USE_SVG_FLAGS = true;                 // set false to go emoji-only
+const FLAG_CDN_BASE = "https://flagcdn.com";
+function flagPng(iso2, w){ return `${FLAG_CDN_BASE}/w${w}/${String(iso2||"").toLowerCase()}.png`; }
+function renderFlag(container, iso2, emoji, size="sm"){
+  container.innerHTML = "";
+  if (USE_SVG_FLAGS && iso2){
+    const img = new Image();
+    img.alt = `${iso2} flag`;
+    img.decoding = "async";
+    img.loading = "lazy";
+    const base = (size === "lg") ? 80 : 40; // pick a bucket size
+    img.src = flagPng(iso2, base);
+    img.srcset = [
+      `${flagPng(iso2, Math.round(base/2))} 0.5x`,
+      `${flagPng(iso2, base)} 1x`,
+      `${flagPng(iso2, base*2)} 2x`
+    ].join(", ");
+    container.appendChild(img);
+    return;
+  }
+  container.textContent = emoji || "🏳️";
+}
 
 /* DOM */
 const els = {
@@ -56,7 +80,6 @@ let rawData = [];
 let data = [];
 let filtered = [];
 let gdpColumnFound = null;
-
 let sortKey = "name";
 let sortDir = "asc";
 
@@ -208,7 +231,7 @@ function makeCard(d){
 
   const flag=document.createElement("div");
   flag.className="flag";
-  flag.textContent=d.flagEmoji||"🏳️";
+  renderFlag(flag, d.iso2, d.flagEmoji, "sm");   // <-- IMG flag (Chrome-safe)
 
   const titleWrap=document.createElement("div");
   const title=document.createElement("div");
@@ -249,7 +272,7 @@ function makeCard(d){
 /* Modal — open with fade-in, close with fade-out */
 function openModal(d){
   // fill content
-  els.modalFlag.textContent = d.flagEmoji || "🏳️";
+  renderFlag(els.modalFlag, d.iso2, d.flagEmoji, "lg");  // <-- IMG flag in modal
   els.modalName.textContent = d.name;
   els.modalOfficial.textContent = "";
   els.modalCapital.textContent = d.capital || "—";
@@ -272,27 +295,17 @@ function openModal(d){
   if(d.isoNum) codes.push(`ISO numeric: ${d.isoNum}`);
   els.modalCodes.textContent = codes.join("  •  ") || "—";
 
-  // prepare animation classes
+  // open with fade-in: [open] first, then .open (double RAF for Safari)
   els.modal.classList.remove("closing","open");
-
-  // open dialog (adds [open] so backdrop exists)
   if(typeof els.modal.showModal==="function"){ els.modal.showModal(); }
   else { els.modal.setAttribute("open",""); }
-
-  // Force a reflow so the base styles (opacity 0 / scale .97) apply before adding .open
-  // This ensures the transition runs reliably across browsers.
-  // Using double RAF improves Safari reliability.
-  requestAnimationFrame(()=>{ requestAnimationFrame(()=>{
-    els.modal.classList.add("open");
-  }); });
+  requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ els.modal.classList.add("open"); }); });
 }
 
 function closeModalSmooth(){
   if(!els.modal.hasAttribute("open")) return;
-  // remove .open to go back to base state, then add .closing (backdrop to 0)
   els.modal.classList.remove("open");
   els.modal.classList.add("closing");
-
   const onEnd=(e)=>{
     if(e.propertyName!=="opacity") return;
     els.modal.removeEventListener("transitionend", onEnd);
@@ -352,7 +365,7 @@ function bindEvents(){
     applyFilters();
   });
 
-  // Close actions
+  // Modal close handlers
   document.querySelectorAll('[value="close"]').forEach(btn=>{
     btn.addEventListener("click",(e)=>{ e.preventDefault(); closeModalSmooth(); });
   });

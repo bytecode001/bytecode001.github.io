@@ -1,7 +1,7 @@
 /* ============================================================
    Country Explorer — styles.css
-   Dark, modern, fully responsive UI with accessible contrast.
-   Includes sort chips and a smooth fading modal (open/close).
+   Dark, modern, responsive UI with sort chips and fading modal.
+   Includes robust flag <img> support (Chrome-friendly).
    ============================================================ */
 
 :root{
@@ -25,11 +25,11 @@ body{
   margin:0;
   font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color:var(--text);
-  background: var(--bg); /* solid background, no gradient */
+  background: var(--bg);
   letter-spacing:.2px;
 }
 
-/* Normalize button look (Reset & chips) */
+/* Normalize buttons */
 button{
   font: inherit;
   color: inherit;
@@ -90,35 +90,35 @@ button{
 
 .hint{ margin-top: 6px; font-size:12px; color:var(--muted) }
 
-/* Buttons (Reset) */
+/* Buttons */
 .btn{
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  height: 42px; padding: 0 14px;
-  border-radius: 12px;
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  height:42px; padding:0 14px;
+  border-radius:12px;
   border:1px solid #2c3858;
   background: linear-gradient(180deg, color-mix(in oklab, var(--brand) 22%, #0d1222), #0d1222);
-  color: var(--text); font-weight: 600; cursor: pointer;
+  color:var(--text); font-weight:600; cursor:pointer;
   transition: filter .15s ease, transform .05s ease, box-shadow .15s ease, background .2s ease;
 }
-.btn:hover{ filter: brightness(1.06) }
+.btn:hover{ filter:brightness(1.06) }
 .btn:active{ transform: translateY(1px) }
-.btn:focus-visible{ outline: none; box-shadow: var(--ring) }
-.btn-ghost{ background: transparent; border-color: #283352 }
-.btn-ghost:hover{ background:#12172a; filter: none }
+.btn:focus-visible{ outline:none; box-shadow: var(--ring) }
+.btn-ghost{ background:transparent; border-color:#283352 }
+.btn-ghost:hover{ background:#12172a; filter:none }
 
 /* Sort bar & chips */
 .sortbar{
-  display:flex; align-items:center; flex-wrap: wrap; gap:10px;
-  margin-top: 10px;
+  display:flex; align-items:center; flex-wrap:wrap; gap:10px;
+  margin-top:10px;
 }
 .chip{
-  position: relative;
+  position:relative;
   display:inline-flex; align-items:center; gap:8px;
   padding:8px 12px;
-  border-radius: 999px;
+  border-radius:999px;
   background:#0e1426;
   border:1px solid #223056;
-  color: var(--text);
+  color:var(--text);
   cursor:pointer;
   transition: transform .05s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
 }
@@ -129,43 +129,52 @@ button{
   border-color: color-mix(in oklab, var(--brand) 45%, #223056);
 }
 .chip::after{
-  content: "";
-  width: 0; height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  margin-left: 4px;
+  content:"";
+  width:0;height:0;
+  border-left:5px solid transparent;
+  border-right:5px solid transparent;
+  margin-left:4px;
   transform: translateY(1px);
 }
-.chip.asc::after{ border-bottom: 7px solid var(--text) } /* ▲ */
-.chip.desc::after{ border-top: 7px solid var(--text) }    /* ▼ */
+.chip.asc::after{ border-bottom:7px solid var(--text) } /* ▲ */
+.chip.desc::after{ border-top:7px solid var(--text) }   /* ▼ */
 
 /* Results grid */
-.results{ margin: 18px 0 36px }
+.results{ margin:18px 0 36px }
 .grid{
   display:grid;
   grid-template-columns: repeat( auto-fill, minmax(220px, 1fr) );
-  gap: 14px;
+  gap:14px;
 }
 .card{
   position:relative;
   background: linear-gradient(180deg, var(--card), #111625);
-  border: 1px solid #212842;
-  border-radius: var(--radius);
-  padding: 14px;
-  box-shadow: var(--shadow);
+  border:1px solid #212842;
+  border-radius:var(--radius);
+  padding:14px;
+  box-shadow:var(--shadow);
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  cursor: pointer;
+  cursor:pointer;
 }
 .card:hover{
   transform: translateY(-2px);
   border-color: color-mix(in oklab, var(--brand) 45%, #212842);
   box-shadow: 0 12px 36px -14px rgba(0,0,0,.55);
 }
+
+/* Flag container (supports emoji or <img>) */
 .flag{
-  width: 28px; height: 24px; border-radius:6px;
-  display:grid; place-items:center; font-size:18px; background:#0f1424; border:1px solid #26304a;
+  width:28px; height:24px; border-radius:6px;
+  display:grid; place-items:center; font-size:18px;
+  background:#0f1424; border:1px solid #26304a; overflow:hidden;
 }
 .flag.flag-lg{ width:52px; height:42px; font-size:28px; border-radius:10px }
+/* Make <img> flags fill the container nicely */
+.flag img{
+  width:100%; height:100%;
+  display:block; object-fit:cover; border-radius:inherit;
+}
+
 .card-header{ display:flex; gap:10px; align-items:center; margin-bottom:10px }
 .country-name{ font-weight:700; letter-spacing:.2px }
 .country-capital{ color:var(--muted); font-size:12px }
@@ -176,47 +185,29 @@ button{
 .kpi{ display:flex; gap:6px; align-items:center; background:#0e1426; border:1px solid #223056; padding:6px 8px; border-radius:999px }
 .kpi strong{ color:var(--text) }
 
-.empty{ margin: 28px 0; text-align:center; color:var(--muted) }
+.empty{ margin:28px 0; text-align:center; color:var(--muted) }
 .hidden{ display:none }
 
 /* Footer */
-.site-footer{ border-top:1px solid #1f2434; margin-top: 12px; background: #0b0d13 }
+.site-footer{ border-top:1px solid #1f2434; margin-top:12px; background:#0b0d13 }
 .footer-inner{ padding:14px 0; display:flex; gap:10px; justify-content:space-between; color:var(--muted); font-size:12px }
 .footer-inner .buy-link{ color:var(--brand) }
 @media (max-width:600px){ .footer-inner{ flex-direction:column } }
 
-/* ------------------------------
-   Modal (fade-in / fade-out with classes)
-   ------------------------------ */
+/* Modal with fade-in/out */
 .modal{
   width: min(860px, 92vw);
-  border: none;
-  padding: 0;
-  background: transparent;
-
-  /* animation base state */
-  opacity: 0;
-  transform: scale(0.97);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  border:none; padding:0; background:transparent;
+  opacity:0; transform:scale(0.97);
+  transition: opacity .25s ease, transform .25s ease;
 }
+.modal.open{ opacity:1; transform:scale(1) }
+.modal.closing{ opacity:0 !important; transform:scale(0.97) }
 
-/* when dialog is open AND we've added .open, play fade-in */
-.modal.open{
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* play fade-out before closing() */
-.modal.closing{
-  opacity: 0 !important;
-  transform: scale(0.97);
-}
-
-/* Backdrop animates too — it only exists while [open] is set by the browser */
 .modal::backdrop{
   background: rgba(2,6,20,0);
   backdrop-filter: blur(3px);
-  transition: background 0.25s ease;
+  transition: background .25s ease;
 }
 .modal.open::backdrop{ background: rgba(2,6,20,0.6) }
 .modal.closing::backdrop{ background: rgba(2,6,20,0) !important }
@@ -224,27 +215,27 @@ button{
 .modal-card{
   width:100%;
   background: linear-gradient(180deg, var(--panel), var(--panel-2));
-  border: 1px solid #223056; border-radius: 20px; overflow:hidden;
+  border:1px solid #223056; border-radius:20px; overflow:hidden;
 }
 .modal-header{
   display:flex; align-items:center; justify-content:space-between;
-  padding: 14px 16px; border-bottom:1px solid #223056;
+  padding:14px 16px; border-bottom:1px solid #223056;
 }
 .modal-flag-name{ display:flex; align-items:center; gap:12px }
 .modal-title{ margin:0; font-size:20px; color:var(--text) }
 .modal-subtitle{ color:var(--muted); font-size:12px }
 .icon-btn{ width:36px;height:36px;border-radius:10px;border:1px solid #2b3858;background:#0f1322;color:var(--text);cursor:pointer }
 .icon-btn:hover{ background:#121a30 }
-.modal-content{ padding: 16px }
+.modal-content{ padding:16px }
 .details-grid{ display:grid; gap:12px; grid-template-columns: repeat(2, 1fr) }
 @media (max-width:700px){ .details-grid{ grid-template-columns: 1fr } }
 
 .detail{
   background:#0d1324; border:1px solid #213056; border-radius:14px; padding:12px;
-  color: var(--text);
+  color:var(--text);
 }
 .dt{ font-size:11px; color:var(--muted); margin-bottom:6px }
-.dd{ font-size:14px; color: var(--text) }
+.dd{ font-size:14px; color:var(--text) }
 .taglist{ display:flex; gap:6px; flex-wrap:wrap }
 .taglist .tag{ border:1px solid #2b395c; background:#0c1224; padding:4px 8px; border-radius:999px; font-size:12px; color:var(--text) }
-.modal-footer{ padding: 12px 16px; border-top:1px solid #223056; display:flex; justify-content:flex-end }
+.modal-footer{ padding:12px 16px; border-top:1px solid #223056; display:flex; justify-content:flex-end }
