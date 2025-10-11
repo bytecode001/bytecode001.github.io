@@ -17,6 +17,10 @@
    -------------------------- */
 
 // CSV path (same folder as index.html)
+// ⚠️ Note:
+// This repository includes a full CSV for reference only.
+// You are not allowed to use it together with this code in public apps.
+// The full licensed dataset can be obtained from Datacogito.
 const CSV_PATH = "countries_dataset_2025_v1_0.csv";
 
 // GDP per capita aliases supported (pick the first available)
