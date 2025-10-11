@@ -1,1 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Country Explorer</title>
 
+  <!-- Inter for a clean, modern look -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- PapaParse (CSV → JSON) -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
+
+  <!-- App logic -->
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <!-- Sticky header with title + tagline -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="app-title">🌍 Country Explorer</h1>
+      <p class="app-subtitle">Search, filter, sort, and discover countries of the world.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Search & filters toolbar -->
+    <section class="toolbar" aria-label="Search, filters and sorting">
+      <!-- Row 1: search + continent + language -->
+      <div class="toolbar-row">
+        <label class="field">
+          <span class="label">Search</span>
+          <input id="searchInput" class="input" type="search" placeholder="Try: Italy, IT, Rome…" />
+        </label>
+
+        <label class="field">
+          <span class="label">Continent</span>
+          <select id="continentSelect" class="select">
+            <option value="">All</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="label">Language</span>
+          <select id="languageSelect" class="select">
+            <option value="">All</option>
+          </select>
+        </label>
+      </div>
+
+      <!-- Row 2: population range -->
+      <div class="toolbar-row">
+        <label class="field">
+          <span class="label">Population (min)</span>
+          <input id="popMin" class="input" type="number" inputmode="numeric" placeholder="0" min="0" />
+        </label>
+
+        <label class="field">
+          <span class="label">Population (max)</span>
+          <input id="popMax" class="input" type="number" inputmode="numeric" placeholder="2,000,000,000" min="0" />
+        </label>
+
+        <div class="actions"></div>
+      </div>
+
+      <!-- Row 3: GDP per capita range (auto-hides if column missing) -->
+      <div id="gdpRow" class="toolbar-row">
+        <label class="field">
+          <span class="label">GDP per capita (min)</span>
+          <input id="gdpMin" class="input" type="number" inputmode="numeric" placeholder="0" min="0" />
+        </label>
+
+        <label class="field">
+          <span class="label">GDP per capita (max)</span>
+          <input id="gdpMax" class="input" type="number" inputmode="numeric" placeholder="150,000" min="0" />
+        </label>
+
+        <div class="actions">
+          <button id="resetBtn" class="btn btn-ghost" type="button">Reset</button>
+        </div>
+      </div>
+
+      <!-- Row 4: sort chips -->
+      <div class="sortbar" role="toolbar" aria-label="Sorting">
+        <span class="label muted">Sort by</span>
+        <!-- Each chip toggles asc/desc on click; aria-pressed conveys state -->
+        <button id="chipName" class="chip" type="button" data-key="name" aria-pressed="false" title="Sort by Name">Name</button>
+        <button id="chipPopulation" class="chip" type="button" data-key="population" aria-pressed="false" title="Sort by Population">Population</button>
+        <button id="chipGDP" class="chip" type="button" data-key="gdp_pc" aria-pressed="false" title="Sort by GDP per capita">GDP per capita</button>
+        <button id="chipArea" class="chip" type="button" data-key="area" aria-pressed="false" title="Sort by Area">Area</button>
+        <span id="sortHint" class="hint"></span>
+      </div>
+
+      <!-- Live hint with result count -->
+      <div id="hintWrapper" class="hint" role="status" aria-live="polite"></div>
+    </section>
+
+    <!-- Cards grid + empty state -->
+    <section aria-label="Results" class="results">
+      <div id="cardsGrid" class="grid"></div>
+      <div id="emptyState" class="empty hidden">No results. Try adjusting your filters.</div>
+    </section>
+  </main>
+
+  <!-- Footer with Payhip link (Datacogito) -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>Dataset: <code>countries_dataset_2025_v1_0.csv</code></span>
+      <span>
+        Want the curated CSV?
+        <a class="buy-link" href="https://payhip.com/Datacogito" target="_blank" rel="noopener noreferrer">
+          Buy it on Payhip (Datacogito)
+        </a>
+      </span>
+    </div>
+  </footer>
+
+  <!-- Country details modal -->
+  <dialog id="countryModal" class="modal">
+    <form method="dialog" class="modal-card">
+      <header class="modal-header">
+        <div class="modal-flag-name">
+          <div id="modalFlag" class="flag flag-lg" aria-hidden="true">🏳️</div>
+          <div>
+            <h2 id="modalName" class="modal-title">Country Name</h2>
+            <div id="modalOfficial" class="modal-subtitle"></div>
+          </div>
+        </div>
+        <button class="icon-btn" value="close" aria-label="Close dialog">&times;</button>
+      </header>
+
+      <div class="modal-content">
+        <div class="details-grid">
+          <div class="detail">
+            <div class="dt">Capital</div>
+            <div id="modalCapital" class="dd">—</div>
+          </div>
+          <div class="detail">
+            <div class="dt">Continent</div>
+            <div id="modalRegion" class="dd">—</div>
+          </div>
+          <div class="detail">
+            <div class="dt">Population</div>
+            <div id="modalPopulation" class="dd">—</div>
+          </div>
+          <div class="detail">
+            <div class="dt">Area (km²)</div>
+            <div id="modalArea" class="dd">—</div>
+          </div>
+          <div class="detail">
+            <div class="dt">GDP per capita (USD)</div>
+            <div id="modalGDPpc" class="dd">—</div>
+          </div>
+          <div class="detail">
+            <div class="dt">Languages</div>
+            <div id="modalLanguages" class="dd taglist">—</div>
+          </div>
+          <div class="detail">
+            <div class="dt">Currencies</div>
+            <div id="modalCurrencies" class="dd taglist">—</div>
+          </div>
+          <div class="detail">
+            <div class="dt">Codes</div>
+            <div id="modalCodes" class="dd">—</div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <button class="btn" value="close">Close</button>
+      </footer>
+    </form>
+  </dialog>
+</body>
+</html>
