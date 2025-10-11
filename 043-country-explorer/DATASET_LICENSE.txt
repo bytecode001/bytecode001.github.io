@@ -1,0 +1,13 @@
+📄 DATASET LICENSE NOTICE
+
+This dataset (countries_dataset_2025_v1_0.csv) is provided for reference and educational purposes only.
+
+You are free to:
+- View, study, and experiment with this data locally.
+
+You are NOT allowed to:
+- Redistribute, resell, or include this dataset in derivative or commercial projects.
+- Combine this dataset with the Country Explorer app or any other software for public distribution.
+
+👉 To obtain a license for full use (commercial, academic, or production),
+please visit: https://payhip.com/b/Z2LKi
