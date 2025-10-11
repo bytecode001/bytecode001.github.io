@@ -1,7 +1,7 @@
 /* ============================================================
    Country Explorer — styles.css
    Dark, modern, fully responsive UI with accessible contrast.
-   Includes sort chips that toggle asc/desc states.
+   Includes sort chips and a smooth fading modal (open/close).
    ============================================================ */
 
 :root{
@@ -21,14 +21,13 @@
 
 *{ box-sizing:border-box }
 html,body{ height:100% }
-body {
-  margin: 0;
+body{
+  margin:0;
   font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color: var(--text);
-  background: var(--bg); 
-  letter-spacing: .2px;
+  color:var(--text);
+  background: var(--bg); /* solid background, no gradient */
+  letter-spacing:.2px;
 }
-
 
 /* Normalize button look (Reset & chips) */
 button{
@@ -130,7 +129,6 @@ button{
   border-color: color-mix(in oklab, var(--brand) 45%, #223056);
 }
 .chip::after{
-  /* arrow indicator hidden by default */
   content: "";
   width: 0; height: 0;
   border-left: 5px solid transparent;
@@ -138,14 +136,8 @@ button{
   margin-left: 4px;
   transform: translateY(1px);
 }
-.chip.asc::after{
-  /* ▲ */
-  border-bottom: 7px solid var(--text);
-}
-.chip.desc::after{
-  /* ▼ */
-  border-top: 7px solid var(--text);
-}
+.chip.asc::after{ border-bottom: 7px solid var(--text) } /* ▲ */
+.chip.desc::after{ border-top: 7px solid var(--text) }    /* ▼ */
 
 /* Results grid */
 .results{ margin: 18px 0 36px }
@@ -193,11 +185,51 @@ button{
 .footer-inner .buy-link{ color:var(--brand) }
 @media (max-width:600px){ .footer-inner{ flex-direction:column } }
 
-/* Modal */
-.modal{ width: min(860px, 92vw); border: none; padding:0; background: transparent }
-.modal::backdrop{ background: rgba(2,6,20,.6); backdrop-filter: blur(3px) }
-.modal-card{ width:100%; background: linear-gradient(180deg, var(--panel), var(--panel-2)); border: 1px solid #223056; border-radius: 20px; overflow:hidden }
-.modal-header{ display:flex; align-items:center; justify-content:space-between; padding: 14px 16px; border-bottom:1px solid #223056 }
+/* ------------------------------
+   Modal (fade-in / fade-out with classes)
+   ------------------------------ */
+.modal{
+  width: min(860px, 92vw);
+  border: none;
+  padding: 0;
+  background: transparent;
+
+  /* animation base state */
+  opacity: 0;
+  transform: scale(0.97);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* when dialog is open AND we've added .open, play fade-in */
+.modal.open{
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* play fade-out before closing() */
+.modal.closing{
+  opacity: 0 !important;
+  transform: scale(0.97);
+}
+
+/* Backdrop animates too — it only exists while [open] is set by the browser */
+.modal::backdrop{
+  background: rgba(2,6,20,0);
+  backdrop-filter: blur(3px);
+  transition: background 0.25s ease;
+}
+.modal.open::backdrop{ background: rgba(2,6,20,0.6) }
+.modal.closing::backdrop{ background: rgba(2,6,20,0) !important }
+
+.modal-card{
+  width:100%;
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border: 1px solid #223056; border-radius: 20px; overflow:hidden;
+}
+.modal-header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 14px 16px; border-bottom:1px solid #223056;
+}
 .modal-flag-name{ display:flex; align-items:center; gap:12px }
 .modal-title{ margin:0; font-size:20px; color:var(--text) }
 .modal-subtitle{ color:var(--muted); font-size:12px }
@@ -207,7 +239,10 @@ button{
 .details-grid{ display:grid; gap:12px; grid-template-columns: repeat(2, 1fr) }
 @media (max-width:700px){ .details-grid{ grid-template-columns: 1fr } }
 
-.detail{ background:#0d1324; border:1px solid #213056; border-radius:14px; padding:12px; color: var(--text) }
+.detail{
+  background:#0d1324; border:1px solid #213056; border-radius:14px; padding:12px;
+  color: var(--text);
+}
 .dt{ font-size:11px; color:var(--muted); margin-bottom:6px }
 .dd{ font-size:14px; color: var(--text) }
 .taglist{ display:flex; gap:6px; flex-wrap:wrap }
