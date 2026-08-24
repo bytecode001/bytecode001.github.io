@@ -1,1 +1,582 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#090a0f">
+    <meta
+      name="description"
+      content="Chromaflow is an accessible, progressively enhanced gallery with animated filter chips."
+    >
+    <meta name="referrer" content="no-referrer">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    >
+    <title>Chromaflow — Animated Filter Chips</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
 
+  <body id="top">
+    <a class="skip-link" href="#gallery">Skip to project gallery</a>
+
+    <!-- Decorative background layers are intentionally hidden from assistive technology. -->
+    <div class="ambient ambient--violet" aria-hidden="true"></div>
+    <div class="ambient ambient--lime" aria-hidden="true"></div>
+    <div class="noise" aria-hidden="true"></div>
+
+    <header class="site-header shell">
+      <a class="brand" href="#top" aria-label="Chromaflow home">
+        <span class="brand__mark" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span class="brand__name">Chromaflow</span>
+      </a>
+
+      <div class="header-note" aria-label="Project technology">
+        <span class="header-note__dot" aria-hidden="true"></span>
+        CSS Grid · View Transitions
+      </div>
+    </header>
+
+    <main>
+      <section class="hero shell" aria-labelledby="hero-title">
+        <div class="hero__copy">
+          <p class="eyebrow">
+            <span>Animated Filter Chips</span>
+            <span aria-hidden="true">/</span>
+            <span>Progressive enhancement</span>
+          </p>
+
+          <h1 id="hero-title">
+            Ideas, sorted
+            <span class="hero__accent">beautifully.</span>
+          </h1>
+
+          <p class="hero__intro">
+            A living index of experiments across identity, digital, spatial, and
+            motion design. Choose a discipline and watch every project find its place.
+          </p>
+
+          <dl class="hero-stats" aria-label="Gallery overview">
+            <div>
+              <dt>Projects</dt>
+              <dd>12</dd>
+            </div>
+            <div>
+              <dt>Disciplines</dt>
+              <dd>04</dd>
+            </div>
+            <div>
+              <dt>Dependencies</dt>
+              <dd>00</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-art__orbit hero-art__orbit--outer"></div>
+          <div class="hero-art__orbit hero-art__orbit--inner"></div>
+          <div class="hero-art__core">
+            <span>C</span>
+          </div>
+          <span class="floating-chip floating-chip--one">Identity</span>
+          <span class="floating-chip floating-chip--two">Digital</span>
+          <span class="floating-chip floating-chip--three">Motion</span>
+          <span class="hero-art__caption">Filter / Flow / Focus</span>
+        </div>
+      </section>
+
+      <section class="filter-section shell" aria-labelledby="filter-title">
+        <div class="filter-panel">
+          <div class="filter-panel__heading">
+            <div>
+              <p class="section-label">Explore the index</p>
+              <h2 id="filter-title">Filter by discipline</h2>
+            </div>
+
+            <div class="engine-badge" aria-label="Current animation engine">
+              <span class="engine-badge__icon" aria-hidden="true"></span>
+              <span id="engine-label">Checking motion support…</span>
+            </div>
+          </div>
+
+          <!-- Native buttons preserve keyboard and screen-reader behavior without JavaScript. -->
+          <div class="filter-list" id="filter-list" role="group" aria-label="Project filters">
+            <button
+              class="filter-chip"
+              type="button"
+              data-filter="all"
+              aria-pressed="true"
+              aria-controls="gallery"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <rect x="3" y="3" width="7" height="7" rx="2"></rect>
+                <rect x="14" y="3" width="7" height="7" rx="2"></rect>
+                <rect x="3" y="14" width="7" height="7" rx="2"></rect>
+                <rect x="14" y="14" width="7" height="7" rx="2"></rect>
+              </svg>
+              <span>All work</span>
+              <span class="filter-chip__count" aria-hidden="true">12</span>
+            </button>
+
+            <button
+              class="filter-chip"
+              type="button"
+              data-filter="identity"
+              aria-pressed="false"
+              aria-controls="gallery"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M5 4.5h9.5L19 9v10.5H5z"></path>
+                <path d="M14.5 4.5V9H19"></path>
+                <circle cx="9" cy="13" r="1.75"></circle>
+              </svg>
+              <span>Identity</span>
+              <span class="filter-chip__count" aria-hidden="true">03</span>
+            </button>
+
+            <button
+              class="filter-chip"
+              type="button"
+              data-filter="digital"
+              aria-pressed="false"
+              aria-controls="gallery"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <rect x="3.5" y="5" width="17" height="12" rx="2.5"></rect>
+                <path d="M9 20h6M12 17v3"></path>
+              </svg>
+              <span>Digital</span>
+              <span class="filter-chip__count" aria-hidden="true">03</span>
+            </button>
+
+            <button
+              class="filter-chip"
+              type="button"
+              data-filter="spatial"
+              aria-pressed="false"
+              aria-controls="gallery"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9z"></path>
+                <path d="m4 7.5 8 4.5 8-4.5M12 12v9"></path>
+              </svg>
+              <span>Spatial</span>
+              <span class="filter-chip__count" aria-hidden="true">03</span>
+            </button>
+
+            <button
+              class="filter-chip"
+              type="button"
+              data-filter="motion"
+              aria-pressed="false"
+              aria-controls="gallery"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="8.5"></circle>
+                <path d="m10 8 6 4-6 4z"></path>
+              </svg>
+              <span>Motion</span>
+              <span class="filter-chip__count" aria-hidden="true">03</span>
+            </button>
+          </div>
+
+          <noscript>
+            <p class="no-script-note">
+              JavaScript is disabled, so every project is shown and the filters remain inactive.
+            </p>
+          </noscript>
+        </div>
+      </section>
+
+      <section class="gallery-section shell" aria-labelledby="gallery-title">
+        <div class="gallery-heading">
+          <div>
+            <p class="section-label">Curated experiments</p>
+            <h2 id="gallery-title">Selected work</h2>
+          </div>
+
+          <div class="result-summary" id="result-summary" aria-hidden="true">
+            <span id="visible-count">12</span>
+            <span>visible projects</span>
+          </div>
+          <p class="sr-only" id="result-status" role="status" aria-live="polite" aria-atomic="true">
+            Showing all 12 projects.
+          </p>
+        </div>
+
+        <div class="gallery" id="gallery" aria-busy="false">
+          <article
+            class="project-card project-card--wide"
+            id="project-echo"
+            data-category="identity"
+            aria-labelledby="title-echo"
+          >
+            <div class="project-art" aria-hidden="true">
+              <img
+                class="project-art__image"
+                src="img/01-echo-forms.webp"
+                alt=""
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              >
+              <span class="project-art__index">01</span>
+            </div>
+            <div class="project-card__body">
+              <p class="project-card__kicker">Identity · Object culture</p>
+              <h3 id="title-echo">Echo Forms</h3>
+              <p>A modular identity built from repetition, resonance, and tactile geometry.</p>
+              <footer>
+                <span>Brand system</span>
+                <span>2026</span>
+              </footer>
+            </div>
+          </article>
+
+          <article
+            class="project-card"
+            id="project-quiet"
+            data-category="identity"
+            aria-labelledby="title-quiet"
+          >
+            <div class="project-art" aria-hidden="true">
+              <img
+                class="project-art__image"
+                src="img/02-quiet-type.webp"
+                alt=""
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              >
+              <span class="project-art__index">02</span>
+            </div>
+            <div class="project-card__body">
+              <p class="project-card__kicker">Identity · Editorial</p>
+              <h3 id="title-quiet">Quiet Type</h3>
+              <p>A restrained typographic voice for slow publishing and deliberate reading.</p>
+              <footer>
+                <span>Visual language</span>
+                <span>2026</span>
+              </footer>
+            </div>
+          </article>
+
+          <article
+            class="project-card"
+            id="project-palma"
+            data-category="identity"
+            aria-labelledby="title-palma"
+          >
+            <div class="project-art" aria-hidden="true">
+              <img
+                class="project-art__image"
+                src="img/03-palma-house.webp"
+                alt=""
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              >
+              <span class="project-art__index">03</span>
+            </div>
+            <div class="project-card__body">
+              <p class="project-card__kicker">Identity · Hospitality</p>
+              <h3 id="title-palma">Palma House</h3>
+              <p>Sun-washed shapes and warm materials for a quiet Mediterranean retreat.</p>
+              <footer>
+                <span>Brand direction</span>
+                <span>2025</span>
+              </footer>
+            </div>
+          </article>
+
+          <article
+            class="project-card project-card--wide"
+            id="project-nocturne"
+            data-category="digital"
+            aria-labelledby="title-nocturne"
+          >
+            <div class="project-art" aria-hidden="true">
+              <img
+                class="project-art__image"
+                src="img/04-nocturne-os.webp"
+                alt=""
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              >
+              <span class="project-art__index">04</span>
+            </div>
+            <div class="project-card__body">
+              <p class="project-card__kicker">Digital · Music tools</p>
+              <h3 id="title-nocturne">Nocturne OS</h3>
+              <p>An atmospheric composition workspace designed for uninterrupted creative flow.</p>
+              <footer>
+                <span>Product design</span>
+                <span>2026</span>
+              </footer>
+            </div>
+          </article>
+
+          <article
+            class="project-card"
+            id="project-mercury"
+            data-category="digital"
+            aria-labelledby="title-mercury"
+          >
+            <div class="project-art" aria-hidden="true">
+              <img
+                class="project-art__image"
+                src="img/05-mercury-index.webp"
+                alt=""
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              >
+              <span class="project-art__index">05</span>
+            </div>
+            <div class="project-card__body">
+              <p class="project-card__kicker">Digital · Climate data</p>
+              <h3 id="title-mercury">Mercury Index</h3>
+              <p>Dense environmental data translated into a calm, legible daily signal.</p>
+              <footer>
+                <span>Data experience</span>
+                <span>2025</span>
+              </footer>
+            </div>
+          </article>
+
+          <article
+            class="project-card"
+            id="project-afterimage"
+            data-category="digital"
+            aria-labelledby="title-afterimage"
+          >
+            <div class="project-art" aria-hidden="true">
+              <img
+                class="project-art__image"
+                src="img/06-afterimage.webp"
+                alt=""
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              >
+              <span class="project-art__index">06</span>
+            </div>
+            <div class="project-card__body">
+              <p class="project-card__kicker">Digital · Portfolio</p>
+              <h3 id="title-afterimage">Afterimage</h3>
+              <p>A reactive portfolio that lets color linger as visitors move through the work.</p>
+              <footer>
+                <span>Creative development</span>
+                <span>2026</span>
+              </footer>
+            </div>
+          </article>
+
+          <article
+            class="project-card project-card--wide"
+            id="project-circuit"
+            data-category="spatial"
+            aria-labelledby="title-circuit"
+          >
+            <div class="project-art" aria-hidden="true">
+              <img
+                class="project-art__image"
+                src="img/07-soft-circuit.webp"
+                alt=""
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              >
+              <span class="project-art__index">07</span>
+            </div>
+            <div class="project-card__body">
+              <p class="project-card__kicker">Spatial · Retail</p>
+              <h3 id="title-circuit">Soft Circuit</h3>
+              <p>A flexible retail landscape where luminous rails connect products and people.</p>
+              <footer>
+                <span>Spatial concept</span>
+                <span>2025</span>
+              </footer>
+            </div>
+          </article>
+
+          <article
+            class="project-card"
+            id="project-silt"
+            data-category="spatial"
+            aria-labelledby="title-silt"
+          >
+            <div class="project-art" aria-hidden="true">
+              <img
+                class="project-art__image"
+                src="img/08-silt-house.webp"
+                alt=""
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              >
+              <span class="project-art__index">08</span>
+            </div>
+            <div class="project-card__body">
+              <p class="project-card__kicker">Spatial · Architecture</p>
+              <h3 id="title-silt">Silt House</h3>
+              <p>An adaptive waterside home shaped by seasonal light and shifting ground.</p>
+              <footer>
+                <span>Experience strategy</span>
+                <span>2026</span>
+              </footer>
+            </div>
+          </article>
+
+          <article
+            class="project-card"
+            id="project-common"
+            data-category="spatial"
+            aria-labelledby="title-common"
+          >
+            <div class="project-art" aria-hidden="true">
+              <img
+                class="project-art__image"
+                src="img/09-common-ground.webp"
+                alt=""
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              >
+              <span class="project-art__index">09</span>
+            </div>
+            <div class="project-card__body">
+              <p class="project-card__kicker">Spatial · Culture</p>
+              <h3 id="title-common">Common Ground</h3>
+              <p>A neighborhood arts space organized around exchange, making, and gathering.</p>
+              <footer>
+                <span>Wayfinding system</span>
+                <span>2025</span>
+              </footer>
+            </div>
+          </article>
+
+          <article
+            class="project-card project-card--wide"
+            id="project-orbit"
+            data-category="motion"
+            aria-labelledby="title-orbit"
+          >
+            <div class="project-art" aria-hidden="true">
+              <img
+                class="project-art__image"
+                src="img/10-orbit-manual.webp"
+                alt=""
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              >
+              <span class="project-art__index">10</span>
+            </div>
+            <div class="project-card__body">
+              <p class="project-card__kicker">Motion · Title sequence</p>
+              <h3 id="title-orbit">Orbit Manual</h3>
+              <p>A cinematic study of instructions, trajectories, and beautifully imperfect paths.</p>
+              <footer>
+                <span>Motion direction</span>
+                <span>2026</span>
+              </footer>
+            </div>
+          </article>
+
+          <article
+            class="project-card"
+            id="project-drift"
+            data-category="motion"
+            aria-labelledby="title-drift"
+          >
+            <div class="project-art" aria-hidden="true">
+              <img
+                class="project-art__image"
+                src="img/11-chromatic-drift.webp"
+                alt=""
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              >
+              <span class="project-art__index">11</span>
+            </div>
+            <div class="project-card__body">
+              <p class="project-card__kicker">Motion · Generative film</p>
+              <h3 id="title-drift">Chromatic Drift</h3>
+              <p>Procedural color fields that stretch, collide, and dissolve in continuous time.</p>
+              <footer>
+                <span>Generative motion</span>
+                <span>2025</span>
+              </footer>
+            </div>
+          </article>
+
+          <article
+            class="project-card"
+            id="project-signals"
+            data-category="motion"
+            aria-labelledby="title-signals"
+          >
+            <div class="project-art" aria-hidden="true">
+              <img
+                class="project-art__image"
+                src="img/12-tiny-signals.webp"
+                alt=""
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              >
+              <span class="project-art__index">12</span>
+            </div>
+            <div class="project-card__body">
+              <p class="project-card__kicker">Motion · Interaction</p>
+              <h3 id="title-signals">Tiny Signals</h3>
+              <p>A collection of expressive microinteractions for quieter, clearer interfaces.</p>
+              <footer>
+                <span>Interaction study</span>
+                <span>2026</span>
+              </footer>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer shell">
+      <p>Chromaflow <span aria-hidden="true">—</span> motion with meaning.</p>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </footer>
+  </body>
+</html>
