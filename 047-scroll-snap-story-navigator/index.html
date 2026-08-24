@@ -1,1 +1,447 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="An accessible horizontal story navigator built with CSS scroll snap, scroll-state queries, IntersectionObserver, and keyboard controls."
+    />
+    <meta name="theme-color" content="#f1eee7" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Scroll-Snap Story Navigator</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js" defer></script>
+  </head>
 
+  <body>
+    <a class="skip-link" href="#stories">Skip to the stories</a>
+
+    <div class="app-shell">
+      <!-- Compact editorial header. -->
+      <header class="site-header" id="top">
+        <a class="brand" href="#top" aria-label="Storyline home">
+          <span class="brand__mark" aria-hidden="true">SN</span>
+          <span class="brand__name">Storyline</span>
+        </a>
+
+        <p class="edition" aria-label="Edition 6, Field Notes">
+          <span>Edition 06</span>
+          <span aria-hidden="true">•</span>
+          <span>Field Notes</span>
+        </p>
+      </header>
+
+      <main>
+        <!-- Introductory copy establishes the narrative and interaction model. -->
+        <section class="intro" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow">Scroll · Snap · Discover</p>
+            <h1 id="page-title">Six moments,<br /><em>one motion.</em></h1>
+          </div>
+
+          <p class="intro__copy">
+            A small collection of moments between leaving and returning. Swipe,
+            scroll, or use the arrow keys to move through the sequence.
+          </p>
+        </section>
+
+        <section class="navigator" aria-labelledby="stories-title">
+          <h2 class="visually-hidden" id="stories-title">
+            Interactive story sequence
+          </h2>
+
+          <!-- The toolbar mirrors the active state reported by JavaScript. -->
+          <div class="story-toolbar">
+            <p class="story-counter" aria-hidden="true">
+              <span id="current-counter">01</span>
+              <span class="story-counter__divider">/</span>
+              <span>06</span>
+            </p>
+
+            <div
+              class="progress"
+              id="story-progress"
+              role="progressbar"
+              aria-label="Story progress"
+              aria-valuemin="1"
+              aria-valuemax="6"
+              aria-valuenow="1"
+            >
+              <span class="progress__track" aria-hidden="true">
+                <span class="progress__value"></span>
+              </span>
+              <span class="progress__label" id="progress-label">
+                Story 1 of 6
+              </span>
+            </div>
+          </div>
+
+          <!-- This element is both the scroll container and the keyboard target. -->
+          <div
+            class="story-scroller"
+            id="stories"
+            tabindex="0"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Field Notes stories. Use left and right arrow keys to navigate."
+          >
+            <article
+              class="story-card story-card--dawn is-active"
+              data-index="0"
+              data-title="First light"
+              tabindex="-1"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="1 of 6: First light"
+            >
+              <div class="story-card__surface">
+                <div class="story-card__visual">
+                  <img
+                    class="story-card__image"
+                    src="./img/01-first-light.webp"
+                    width="1600"
+                    height="900"
+                    alt="A traveler seated in a red chair at the edge of a cobalt sea."
+                    decoding="async"
+                    fetchpriority="high"
+                  />
+                  <span class="story-card__index" aria-hidden="true">01</span>
+                  <p class="story-card__poster-word" aria-hidden="true">Begin</p>
+                  <p class="story-card__coordinates" aria-hidden="true">
+                    41°54′N · 12°29′E
+                  </p>
+                </div>
+
+                <div class="story-card__content">
+                  <p class="story-card__status">
+                    <span aria-hidden="true"></span>Now reading
+                  </p>
+                  <div class="story-card__copy">
+                    <p class="story-card__eyebrow">Dawn · 05:47</p>
+                    <h3>First light</h3>
+                    <p>
+                      The city exhales before it wakes. For a few quiet minutes,
+                      every road feels like an invitation rather than a route.
+                    </p>
+                  </div>
+                  <p class="story-card__meta"><span>Read</span> 42 sec</p>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="story-card story-card--atlas"
+              data-index="1"
+              data-title="No fixed address"
+              tabindex="-1"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="2 of 6: No fixed address"
+            >
+              <div class="story-card__surface">
+                <div class="story-card__visual">
+                  <img
+                    class="story-card__image"
+                    src="./img/02-no-fixed-address.webp"
+                    width="1600"
+                    height="900"
+                    alt="Two travelers standing back-to-back on a minimal blue platform."
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="story-card__index" aria-hidden="true">02</span>
+                  <p class="story-card__poster-word" aria-hidden="true">Roam</p>
+                  <p class="story-card__coordinates" aria-hidden="true">
+                    38°43′N · 9°08′W
+                  </p>
+                </div>
+
+                <div class="story-card__content">
+                  <p class="story-card__status">
+                    <span aria-hidden="true"></span>Now reading
+                  </p>
+                  <div class="story-card__copy">
+                    <p class="story-card__eyebrow">Atlas · 09:12</p>
+                    <h3>No fixed address</h3>
+                    <p>
+                      We folded the map along unfamiliar lines and followed the
+                      crease. The best detours begin with a small act of trust.
+                    </p>
+                  </div>
+                  <p class="story-card__meta"><span>Read</span> 36 sec</p>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="story-card story-card--signal"
+              data-index="2"
+              data-title="Signal found"
+              tabindex="-1"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="3 of 6: Signal found"
+            >
+              <div class="story-card__surface">
+                <div class="story-card__visual">
+                  <img
+                    class="story-card__image"
+                    src="./img/03-signal-found.webp"
+                    width="1600"
+                    height="900"
+                    alt="A person discovering a signal at a compact retro computer desk."
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="story-card__index" aria-hidden="true">03</span>
+                  <p class="story-card__poster-word" aria-hidden="true">Tune</p>
+                  <p class="story-card__coordinates" aria-hidden="true">
+                    43°46′N · 11°15′E
+                  </p>
+                </div>
+
+                <div class="story-card__content">
+                  <p class="story-card__status">
+                    <span aria-hidden="true"></span>Now reading
+                  </p>
+                  <div class="story-card__copy">
+                    <p class="story-card__eyebrow">Static · 13:26</p>
+                    <h3>Signal found</h3>
+                    <p>
+                      Between two stations, a distant voice surfaced through
+                      the static—brief, imperfect, and somehow exactly on time.
+                    </p>
+                  </div>
+                  <p class="story-card__meta"><span>Read</span> 31 sec</p>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="story-card story-card--rain"
+              data-index="3"
+              data-title="City skin"
+              tabindex="-1"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="4 of 6: City skin"
+            >
+              <div class="story-card__surface">
+                <div class="story-card__visual">
+                  <img
+                    class="story-card__image"
+                    src="./img/04-city-skin.webp"
+                    width="1600"
+                    height="900"
+                    alt="A fashion model with a transparent umbrella on a reflective blue set."
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="story-card__index" aria-hidden="true">04</span>
+                  <p class="story-card__poster-word" aria-hidden="true">After</p>
+                  <p class="story-card__coordinates" aria-hidden="true">
+                    52°22′N · 4°54′E
+                  </p>
+                </div>
+
+                <div class="story-card__content">
+                  <p class="story-card__status">
+                    <span aria-hidden="true"></span>Now reading
+                  </p>
+                  <div class="story-card__copy">
+                    <p class="story-card__eyebrow">After rain · 16:03</p>
+                    <h3>City skin</h3>
+                    <p>
+                      Rain rewrote every surface. Neon doubled in the pavement,
+                      windows sharpened, and the ordinary briefly looked new.
+                    </p>
+                  </div>
+                  <p class="story-card__meta"><span>Read</span> 39 sec</p>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="story-card story-card--night"
+              data-index="4"
+              data-title="Blue hour"
+              tabindex="-1"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="5 of 6: Blue hour"
+            >
+              <div class="story-card__surface">
+                <div class="story-card__visual">
+                  <img
+                    class="story-card__image"
+                    src="./img/05-blue-hour.webp"
+                    width="1600"
+                    height="900"
+                    alt="A lone swimmer floating in calm deep-blue water at dusk."
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="story-card__index" aria-hidden="true">05</span>
+                  <p class="story-card__poster-word" aria-hidden="true">Float</p>
+                  <p class="story-card__coordinates" aria-hidden="true">
+                    40°38′N · 14°36′E
+                  </p>
+                </div>
+
+                <div class="story-card__content">
+                  <p class="story-card__status">
+                    <span aria-hidden="true"></span>Now reading
+                  </p>
+                  <div class="story-card__copy">
+                    <p class="story-card__eyebrow">Night swim · 20:41</p>
+                    <h3>Blue hour</h3>
+                    <p>
+                      The horizon disappeared first. Then the noise. We floated
+                      in the cool dark until distance became a feeling.
+                    </p>
+                  </div>
+                  <p class="story-card__meta"><span>Read</span> 44 sec</p>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="story-card story-card--home"
+              data-index="5"
+              data-title="Soft landing"
+              tabindex="-1"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="6 of 6: Soft landing"
+            >
+              <div class="story-card__surface">
+                <div class="story-card__visual">
+                  <img
+                    class="story-card__image"
+                    src="./img/06-soft-landing.webp"
+                    width="1600"
+                    height="900"
+                    alt="A traveler resting on a cream sofa after returning home."
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="story-card__index" aria-hidden="true">06</span>
+                  <p class="story-card__poster-word" aria-hidden="true">Return</p>
+                  <p class="story-card__coordinates" aria-hidden="true">
+                    41°06′N · 16°52′E
+                  </p>
+                </div>
+
+                <div class="story-card__content">
+                  <p class="story-card__status">
+                    <span aria-hidden="true"></span>Now reading
+                  </p>
+                  <div class="story-card__copy">
+                    <p class="story-card__eyebrow">Home · 23:18</p>
+                    <h3>Soft landing</h3>
+                    <p>
+                      The key turned, the hallway light came on, and the whole
+                      day settled into memory. Returning is part of every journey.
+                    </p>
+                  </div>
+                  <p class="story-card__meta"><span>Read</span> 34 sec</p>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Both the dot navigation and arrow buttons are native controls. -->
+          <div class="story-footer">
+            <nav class="story-dots" aria-label="Choose a story">
+              <button
+                class="story-dot is-active"
+                type="button"
+                data-story-target="0"
+                aria-label="Go to story 1: First light"
+                aria-current="step"
+              >
+                <span>01</span>
+              </button>
+              <button
+                class="story-dot"
+                type="button"
+                data-story-target="1"
+                aria-label="Go to story 2: No fixed address"
+              >
+                <span>02</span>
+              </button>
+              <button
+                class="story-dot"
+                type="button"
+                data-story-target="2"
+                aria-label="Go to story 3: Signal found"
+              >
+                <span>03</span>
+              </button>
+              <button
+                class="story-dot"
+                type="button"
+                data-story-target="3"
+                aria-label="Go to story 4: City skin"
+              >
+                <span>04</span>
+              </button>
+              <button
+                class="story-dot"
+                type="button"
+                data-story-target="4"
+                aria-label="Go to story 5: Blue hour"
+              >
+                <span>05</span>
+              </button>
+              <button
+                class="story-dot"
+                type="button"
+                data-story-target="5"
+                aria-label="Go to story 6: Soft landing"
+              >
+                <span>06</span>
+              </button>
+            </nav>
+
+            <div class="story-controls">
+              <p class="keyboard-hint" aria-hidden="true">
+                <kbd>←</kbd><kbd>→</kbd> to navigate
+              </p>
+              <button
+                class="control-button"
+                id="previous-story"
+                type="button"
+                aria-label="Previous story"
+                disabled
+              >
+                <span aria-hidden="true">←</span>
+              </button>
+              <button
+                class="control-button control-button--next"
+                id="next-story"
+                type="button"
+                aria-label="Next story"
+              >
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+
+          <p class="visually-hidden" id="story-announcer" aria-live="polite"></p>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>Native motion, progressively enhanced.</p>
+        <p class="enhancement-status" id="enhancement-status">
+          Scroll snap enabled
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
