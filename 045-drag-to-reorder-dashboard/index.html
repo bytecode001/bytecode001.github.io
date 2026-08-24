@@ -1,1 +1,316 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#0b0d14">
+    <meta name="referrer" content="no-referrer">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    >
+    <meta
+      name="description"
+      content="A modular dashboard with pointer-driven reordering, FLIP animations, keyboard controls, and locally saved layouts."
+    >
+    <title>AERIS — Drag-to-Reorder Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+  </head>
 
+  <body>
+    <a class="skip-link" href="#dashboard-grid">Skip to dashboard cards</a>
+
+    <!-- Decorative gradients are intentionally hidden from assistive technology. -->
+    <div class="ambient ambient--lime" aria-hidden="true"></div>
+    <div class="ambient ambient--violet" aria-hidden="true"></div>
+
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#main-content" aria-label="AERIS dashboard home">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" focusable="false">
+              <path d="M7 22.5 16 5l9 17.5-9-4.25L7 22.5Z"></path>
+              <circle cx="16" cy="24.5" r="2.5"></circle>
+            </svg>
+          </span>
+          <span class="brand__word">AERIS</span>
+        </a>
+
+        <div class="workspace-pill" aria-label="Current workspace">
+          <span class="workspace-pill__dot" aria-hidden="true"></span>
+          Creative workspace
+        </div>
+
+        <div class="topbar__actions">
+          <time class="live-time" id="live-time" aria-label="Current time"></time>
+          <button class="icon-button" id="reset-layout" type="button" aria-label="Restore the default card order">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M4 4v5h5"></path>
+              <path d="M5.6 15.3A7.5 7.5 0 1 0 6 8.1L4 9"></path>
+            </svg>
+          </button>
+          <div class="avatar" role="img" aria-label="Profile placeholder">A</div>
+        </div>
+      </header>
+
+      <main id="main-content">
+        <section class="intro" aria-labelledby="dashboard-title">
+          <div>
+            <p class="eyebrow" id="today-label">Your workspace</p>
+            <h1 id="dashboard-title"><span id="greeting">Good morning</span>.</h1>
+            <p class="intro__copy">Shape the week, then move what matters.</p>
+          </div>
+
+          <div class="layout-hint">
+            <span class="layout-hint__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <circle cx="9" cy="7" r="1.25"></circle>
+                <circle cx="15" cy="7" r="1.25"></circle>
+                <circle cx="9" cy="12" r="1.25"></circle>
+                <circle cx="15" cy="12" r="1.25"></circle>
+                <circle cx="9" cy="17" r="1.25"></circle>
+                <circle cx="15" cy="17" r="1.25"></circle>
+              </svg>
+            </span>
+            <span><strong>Make it yours.</strong> Press and drag any card to place it anywhere.</span>
+          </div>
+        </section>
+
+        <p class="sr-only" id="drag-instructions">
+          With a mouse, press and drag any non-interactive area of a card. On touch, drag from its handle. With a keyboard, press Enter or Space on a handle, use the arrow keys to move the card, then press Enter or Space again to save. Press Escape to cancel.
+        </p>
+
+        <!-- The DOM order of these cards is the layout source of truth. -->
+        <section class="dashboard-grid" id="dashboard-grid" aria-label="Reorderable dashboard cards">
+          <article class="dashboard-card card--focus" data-card-id="deep-work" data-card-title="Deep work">
+            <header class="card-header">
+              <div>
+                <p class="card-kicker">Focus</p>
+                <h2>Deep work</h2>
+              </div>
+              <button class="drag-handle" type="button" aria-label="Reorder Deep work" aria-describedby="drag-instructions" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <circle cx="9" cy="7" r="1.25"></circle><circle cx="15" cy="7" r="1.25"></circle>
+                  <circle cx="9" cy="12" r="1.25"></circle><circle cx="15" cy="12" r="1.25"></circle>
+                  <circle cx="9" cy="17" r="1.25"></circle><circle cx="15" cy="17" r="1.25"></circle>
+                </svg>
+              </button>
+            </header>
+            <div class="focus-layout">
+              <div>
+                <p class="metric metric--large">18<span>h</span> 42<span>m</span></p>
+                <p class="metric-note"><span class="trend trend--up">↗ 12%</span> from last week</p>
+              </div>
+              <div class="focus-ring" role="img" aria-label="Seventy-eight percent of weekly focus target completed">
+                <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                  <circle class="focus-ring__track" cx="50" cy="50" r="42"></circle>
+                  <circle class="focus-ring__value" cx="50" cy="50" r="42"></circle>
+                </svg>
+                <span>78<small>%</small></span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span>Weekly target</span><strong>24 hours</strong>
+            </div>
+          </article>
+
+          <article class="dashboard-card card--momentum" data-card-id="momentum" data-card-title="Momentum">
+            <header class="card-header">
+              <div>
+                <p class="card-kicker">Flow score</p>
+                <h2>Momentum</h2>
+              </div>
+              <button class="drag-handle" type="button" aria-label="Reorder Momentum" aria-describedby="drag-instructions" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <circle cx="9" cy="7" r="1.25"></circle><circle cx="15" cy="7" r="1.25"></circle>
+                  <circle cx="9" cy="12" r="1.25"></circle><circle cx="15" cy="12" r="1.25"></circle>
+                  <circle cx="9" cy="17" r="1.25"></circle><circle cx="15" cy="17" r="1.25"></circle>
+                </svg>
+              </button>
+            </header>
+            <div class="score-row">
+              <p class="metric metric--score">86</p>
+              <span class="score-row__unit">/ 100</span>
+            </div>
+            <div class="mini-bars" aria-label="Momentum over the last seven days" role="img">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <p class="insight"><span aria-hidden="true">✦</span> Your strongest streak this month.</p>
+          </article>
+
+          <article class="dashboard-card card--agenda" data-card-id="agenda" data-card-title="Today's agenda">
+            <header class="card-header">
+              <div>
+                <p class="card-kicker" id="agenda-day-label">Today</p>
+                <h2>Today's agenda</h2>
+              </div>
+              <button class="drag-handle" type="button" aria-label="Reorder Today's agenda" aria-describedby="drag-instructions" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <circle cx="9" cy="7" r="1.25"></circle><circle cx="15" cy="7" r="1.25"></circle>
+                  <circle cx="9" cy="12" r="1.25"></circle><circle cx="15" cy="12" r="1.25"></circle>
+                  <circle cx="9" cy="17" r="1.25"></circle><circle cx="15" cy="17" r="1.25"></circle>
+                </svg>
+              </button>
+            </header>
+            <ol class="agenda-list">
+              <li><time datetime="09:30">09:30</time><span><strong>Creative sprint</strong><small>Brand system</small></span></li>
+              <li><time datetime="11:00">11:00</time><span><strong>Client review</strong><small>30 min · Video</small></span></li>
+              <li><time datetime="15:00">15:00</time><span><strong>3D asset pass</strong><small>Production</small></span></li>
+            </ol>
+          </article>
+
+          <article class="dashboard-card card--rhythm" data-card-id="weekly-rhythm" data-card-title="Weekly rhythm">
+            <header class="card-header">
+              <div>
+                <p class="card-kicker">Activity</p>
+                <h2>Weekly rhythm</h2>
+              </div>
+              <button class="drag-handle" type="button" aria-label="Reorder Weekly rhythm" aria-describedby="drag-instructions" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <circle cx="9" cy="7" r="1.25"></circle><circle cx="15" cy="7" r="1.25"></circle>
+                  <circle cx="9" cy="12" r="1.25"></circle><circle cx="15" cy="12" r="1.25"></circle>
+                  <circle cx="9" cy="17" r="1.25"></circle><circle cx="15" cy="17" r="1.25"></circle>
+                </svg>
+              </button>
+            </header>
+            <div class="chart-summary">
+              <p class="metric">32.5<span>h</span></p>
+              <span class="trend trend--up">+8.4%</span>
+            </div>
+            <div class="line-chart" role="img" aria-label="Weekly activity rose from Monday to Sunday with a peak on Saturday">
+              <svg viewBox="0 0 320 118" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path class="line-chart__grid" d="M0 22.5h320M0 58.5h320M0 94.5h320"></path>
+                <path class="line-chart__area" d="M0 92 C35 88 47 64 82 70 S130 91 165 58 S209 49 238 34 S279 15 320 25 V118 H0 Z"></path>
+                <path class="line-chart__line" d="M0 92 C35 88 47 64 82 70 S130 91 165 58 S209 49 238 34 S279 15 320 25"></path>
+              </svg>
+              <div class="chart-days" aria-hidden="true"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+            </div>
+          </article>
+
+          <article class="dashboard-card card--tasks" data-card-id="priority-queue" data-card-title="Priority queue">
+            <header class="card-header">
+              <div>
+                <p class="card-kicker">Three of five</p>
+                <h2>Priority queue</h2>
+              </div>
+              <button class="drag-handle" type="button" aria-label="Reorder Priority queue" aria-describedby="drag-instructions" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <circle cx="9" cy="7" r="1.25"></circle><circle cx="15" cy="7" r="1.25"></circle>
+                  <circle cx="9" cy="12" r="1.25"></circle><circle cx="15" cy="12" r="1.25"></circle>
+                  <circle cx="9" cy="17" r="1.25"></circle><circle cx="15" cy="17" r="1.25"></circle>
+                </svg>
+              </button>
+            </header>
+            <ul class="task-list">
+              <li><label><input type="checkbox" checked><span>Finalize visual directions</span></label><small>09:00</small></li>
+              <li><label><input type="checkbox" checked><span>Package responsive assets</span></label><small>10:30</small></li>
+              <li><label><input type="checkbox" checked><span>Publish project notes</span></label><small>12:00</small></li>
+              <li><label><input type="checkbox"><span>Record process walkthrough</span></label><small>Tomorrow</small></li>
+            </ul>
+          </article>
+
+          <article class="dashboard-card card--ideas" data-card-id="ideas" data-card-title="Ideas captured">
+            <header class="card-header">
+              <div>
+                <p class="card-kicker">Library</p>
+                <h2>Ideas captured</h2>
+              </div>
+              <button class="drag-handle" type="button" aria-label="Reorder Ideas captured" aria-describedby="drag-instructions" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <circle cx="9" cy="7" r="1.25"></circle><circle cx="15" cy="7" r="1.25"></circle>
+                  <circle cx="9" cy="12" r="1.25"></circle><circle cx="15" cy="12" r="1.25"></circle>
+                  <circle cx="9" cy="17" r="1.25"></circle><circle cx="15" cy="17" r="1.25"></circle>
+                </svg>
+              </button>
+            </header>
+            <p class="metric metric--large">47</p>
+            <p class="metric-note">Seven new notes this week</p>
+            <div class="tag-cloud" aria-label="Popular idea categories">
+              <span>Interaction</span><span>3D</span><span>Editorial</span><span>Motion</span>
+            </div>
+          </article>
+
+          <article class="dashboard-card card--pulse" data-card-id="creative-pulse" data-card-title="Creative pulse">
+            <header class="card-header">
+              <div>
+                <p class="card-kicker">Last 28 days</p>
+                <h2>Creative pulse</h2>
+              </div>
+              <button class="drag-handle" type="button" aria-label="Reorder Creative pulse" aria-describedby="drag-instructions" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <circle cx="9" cy="7" r="1.25"></circle><circle cx="15" cy="7" r="1.25"></circle>
+                  <circle cx="9" cy="12" r="1.25"></circle><circle cx="15" cy="12" r="1.25"></circle>
+                  <circle cx="9" cy="17" r="1.25"></circle><circle cx="15" cy="17" r="1.25"></circle>
+                </svg>
+              </button>
+            </header>
+            <div class="heatmap" role="img" aria-label="Creative activity heatmap showing consistent activity over the last four weeks">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="pulse-caption"><span><i></i> Less</span><span><i></i><i></i><i></i> More</span></div>
+            <p class="insight"><span aria-hidden="true">●</span> 11-day creation streak</p>
+          </article>
+
+          <article class="dashboard-card card--milestone" data-card-id="milestone" data-card-title="Next milestone">
+            <header class="card-header">
+              <div>
+                <p class="card-kicker">Launch plan</p>
+                <h2>Next milestone</h2>
+              </div>
+              <button class="drag-handle" type="button" aria-label="Reorder Next milestone" aria-describedby="drag-instructions" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <circle cx="9" cy="7" r="1.25"></circle><circle cx="15" cy="7" r="1.25"></circle>
+                  <circle cx="9" cy="12" r="1.25"></circle><circle cx="15" cy="12" r="1.25"></circle>
+                  <circle cx="9" cy="17" r="1.25"></circle><circle cx="15" cy="17" r="1.25"></circle>
+                </svg>
+              </button>
+            </header>
+            <div class="milestone-date"><span>Portfolio refresh</span><time datetime="2026-09-02">02 Sep</time></div>
+            <div class="progress-track" role="progressbar" aria-label="Portfolio refresh progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68"><span></span></div>
+            <div class="milestone-meta"><strong>68% complete</strong><span>4 tasks left</span></div>
+            <div class="collaborators" aria-label="Three collaborators">
+              <span>JD</span><span>AM</span><span>LC</span><i>+2</i>
+            </div>
+          </article>
+
+          <article class="dashboard-card card--resources" data-card-id="resource-mix" data-card-title="Resource mix">
+            <header class="card-header">
+              <div>
+                <p class="card-kicker">This week</p>
+                <h2>Resource mix</h2>
+              </div>
+              <button class="drag-handle" type="button" aria-label="Reorder Resource mix" aria-describedby="drag-instructions" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <circle cx="9" cy="7" r="1.25"></circle><circle cx="15" cy="7" r="1.25"></circle>
+                  <circle cx="9" cy="12" r="1.25"></circle><circle cx="15" cy="12" r="1.25"></circle>
+                  <circle cx="9" cy="17" r="1.25"></circle><circle cx="15" cy="17" r="1.25"></circle>
+                </svg>
+              </button>
+            </header>
+            <div class="resource-donut" role="img" aria-label="Resource mix: 46 percent design, 31 percent production, and 23 percent admin">
+              <div class="resource-donut__shape"><span>32.5<small>h</small></span></div>
+              <ul>
+                <li><i class="legend-dot legend-dot--lime"></i><span>Design</span><strong>46%</strong></li>
+                <li><i class="legend-dot legend-dot--violet"></i><span>Production</span><strong>31%</strong></li>
+                <li><i class="legend-dot legend-dot--blue"></i><span>Admin</span><strong>23%</strong></li>
+              </ul>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="app-footer">
+        <p><span class="save-dot" aria-hidden="true"></span> Layout saved on this device</p>
+        <p>AERIS / 2026</p>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div class="sr-only" id="drag-status" role="status" aria-live="assertive" aria-atomic="true"></div>
+  </body>
+</html>
