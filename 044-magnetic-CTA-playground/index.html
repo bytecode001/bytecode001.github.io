@@ -1,1 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="An interactive playground for tuning accessible magnetic CTA buttons."
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Magnetic CTA Playground</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
 
+  <body>
+    <div class="app-shell">
+      <!-- Compact product header. -->
+      <header class="app-header">
+        <a class="brand" href="#playground" aria-label="Magnetic CTA Playground home">
+          <span class="brand__mark" aria-hidden="true">
+            <span></span>
+            <span></span>
+          </span>
+          <span>Magnetic CTA</span>
+        </a>
+
+        <div class="header-meta" aria-label="Technology used">
+          <span>Pointer Events</span>
+          <span class="header-meta__dot" aria-hidden="true"></span>
+          <span>60 FPS</span>
+        </div>
+      </header>
+
+      <main id="playground" class="playground">
+        <!-- Introduction and live status. -->
+        <section class="intro" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow">
+              <span aria-hidden="true"></span>
+              Interaction laboratory
+            </p>
+            <h1 id="page-title">Tune the pull.<br />Feel the spring.</h1>
+          </div>
+
+          <div class="intro__copy">
+            <p>
+              Move your pointer near a button. It follows with a subtle magnetic
+              pull, then springs precisely back into place.
+            </p>
+            <p class="motion-status" data-motion-status aria-live="polite">
+              Motion is active
+            </p>
+          </div>
+        </section>
+
+        <div class="workspace">
+          <!-- Interactive preview surface. -->
+          <section
+            class="preview-card"
+            data-playground
+            aria-labelledby="preview-title"
+          >
+            <div class="preview-card__topbar">
+              <div>
+                <p class="section-label">Live preview</p>
+                <h2 id="preview-title">Three personalities</h2>
+              </div>
+
+              <div class="live-badge">
+                <span aria-hidden="true"></span>
+                Live
+              </div>
+            </div>
+
+            <div class="button-stage">
+              <div class="magnetic-target" data-magnetic-target>
+                <button class="magnetic-cta magnetic-cta--acid" type="button">
+                  <span class="magnetic-cta__label">Start building</span>
+                  <span class="magnetic-cta__icon" aria-hidden="true">↗</span>
+                </button>
+              </div>
+
+              <div class="magnetic-target" data-magnetic-target>
+                <button class="magnetic-cta magnetic-cta--light" type="button">
+                  <span class="magnetic-cta__label">Explore motion</span>
+                  <span class="magnetic-cta__icon" aria-hidden="true">→</span>
+                </button>
+              </div>
+
+              <div class="magnetic-target" data-magnetic-target>
+                <button class="magnetic-cta magnetic-cta--outline" type="button">
+                  <span class="magnetic-cta__label">Launch idea</span>
+                  <span class="magnetic-cta__icon" aria-hidden="true">✦</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="preview-card__footer" aria-hidden="true">
+              <span>Move slowly around the edges</span>
+              <span class="coordinate-display" data-coordinate-display>X 000 · Y 000</span>
+            </div>
+          </section>
+
+          <!-- Controls remain native, labeled and keyboard accessible. -->
+          <aside class="controls-card" aria-labelledby="controls-title">
+            <div class="controls-card__header">
+              <div>
+                <p class="section-label">Motion controls</p>
+                <h2 id="controls-title">Make it yours</h2>
+              </div>
+
+              <label class="switch">
+                <span class="switch__label">Motion</span>
+                <input type="checkbox" data-motion-toggle checked />
+                <span class="switch__track" aria-hidden="true">
+                  <span></span>
+                </span>
+              </label>
+            </div>
+
+            <div class="control-list">
+              <label class="range-control" for="strength">
+                <span class="range-control__meta">
+                  <span>Pull strength</span>
+                  <output for="strength" data-output="strength">28%</output>
+                </span>
+                <input
+                  id="strength"
+                  name="strength"
+                  type="range"
+                  min="8"
+                  max="48"
+                  step="1"
+                  value="28"
+                  data-setting="strength"
+                />
+              </label>
+
+              <label class="range-control" for="radius">
+                <span class="range-control__meta">
+                  <span>Magnetic field</span>
+                  <output for="radius" data-output="radius">180 px</output>
+                </span>
+                <input
+                  id="radius"
+                  name="radius"
+                  type="range"
+                  min="80"
+                  max="280"
+                  step="10"
+                  value="180"
+                  data-setting="radius"
+                />
+              </label>
+
+              <label class="range-control" for="spring">
+                <span class="range-control__meta">
+                  <span>Spring tension</span>
+                  <output for="spring" data-output="spring">14</output>
+                </span>
+                <input
+                  id="spring"
+                  name="spring"
+                  type="range"
+                  min="6"
+                  max="24"
+                  step="1"
+                  value="14"
+                  data-setting="spring"
+                />
+              </label>
+
+              <label class="range-control" for="damping">
+                <span class="range-control__meta">
+                  <span>Damping</span>
+                  <output for="damping" data-output="damping">82%</output>
+                </span>
+                <input
+                  id="damping"
+                  name="damping"
+                  type="range"
+                  min="65"
+                  max="94"
+                  step="1"
+                  value="82"
+                  data-setting="damping"
+                />
+              </label>
+            </div>
+
+            <div class="controls-card__footer">
+              <button class="reset-button" type="button" data-reset>
+                <span aria-hidden="true">↺</span>
+                Reset values
+              </button>
+              <span class="controls-card__hint">No libraries. Just physics.</span>
+            </div>
+          </aside>
+        </div>
+
+        <section class="tech-strip" aria-label="Implementation details">
+          <p>Built with</p>
+          <ul>
+            <li>Semantic buttons</li>
+            <li>CSS transforms</li>
+            <li>Pointer Events</li>
+            <li>requestAnimationFrame</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" data-toast role="status" aria-live="polite" aria-atomic="true"></div>
+  </body>
+</html>
