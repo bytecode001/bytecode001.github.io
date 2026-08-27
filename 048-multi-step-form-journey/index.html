@@ -1,1 +1,505 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="A modern, accessible multi-step project intake form with progressive validation and session recovery."
+    >
+    <meta name="referrer" content="no-referrer">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'none'; connect-src 'none'; img-src 'self' data:; object-src 'none'; script-src 'self'; style-src 'self'; form-action 'self'"
+    >
+    <title>Multi-Step Form Journey</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+  </head>
 
+  <body>
+    <div class="ambient ambient--one" aria-hidden="true"></div>
+    <div class="ambient ambient--two" aria-hidden="true"></div>
+
+    <main class="journey" aria-labelledby="journey-title">
+      <!-- Persistent journey context and progress navigation. -->
+      <aside class="journey__rail">
+        <div class="rail__top">
+          <a class="brand" href="index.html" aria-label="Northstar home">
+            <span class="brand__mark" aria-hidden="true">N</span>
+            <span>Northstar</span>
+          </a>
+
+          <div class="rail__intro">
+            <p class="eyebrow eyebrow--light">Project intake</p>
+            <h1 id="journey-title">Turn a rough idea into a clear next step.</h1>
+            <p>
+              Four focused moments. One concise brief your team can act on.
+            </p>
+          </div>
+
+          <div class="progress-block">
+            <div class="progress-block__meta">
+              <span>Your progress</span>
+              <strong id="progressPercent">25%</strong>
+            </div>
+            <div
+              id="progressBar"
+              class="progress-track"
+              role="progressbar"
+              aria-label="Form progress"
+              aria-valuemin="1"
+              aria-valuemax="4"
+              aria-valuenow="1"
+              aria-valuetext="Step 1 of 4"
+            >
+              <span id="progressFill" class="progress-track__fill"></span>
+            </div>
+          </div>
+
+          <nav class="stepper" aria-label="Form steps">
+            <ol>
+              <li>
+                <button
+                  class="stepper__step is-active"
+                  type="button"
+                  data-step-target="0"
+                  aria-current="step"
+                >
+                  <span class="stepper__number" aria-hidden="true">01</span>
+                  <span class="stepper__copy">
+                    <strong>About you</strong>
+                    <small>Contact details</small>
+                  </span>
+                  <span class="stepper__status" aria-hidden="true"></span>
+                </button>
+              </li>
+              <li>
+                <button
+                  class="stepper__step"
+                  type="button"
+                  data-step-target="1"
+                  disabled
+                >
+                  <span class="stepper__number" aria-hidden="true">02</span>
+                  <span class="stepper__copy">
+                    <strong>The project</strong>
+                    <small>Scope and goals</small>
+                  </span>
+                  <span class="stepper__status" aria-hidden="true"></span>
+                </button>
+              </li>
+              <li>
+                <button
+                  class="stepper__step"
+                  type="button"
+                  data-step-target="2"
+                  disabled
+                >
+                  <span class="stepper__number" aria-hidden="true">03</span>
+                  <span class="stepper__copy">
+                    <strong>The plan</strong>
+                    <small>Timing and budget</small>
+                  </span>
+                  <span class="stepper__status" aria-hidden="true"></span>
+                </button>
+              </li>
+              <li>
+                <button
+                  class="stepper__step"
+                  type="button"
+                  data-step-target="3"
+                  disabled
+                >
+                  <span class="stepper__number" aria-hidden="true">04</span>
+                  <span class="stepper__copy">
+                    <strong>Review</strong>
+                    <small>Confirm your brief</small>
+                  </span>
+                  <span class="stepper__status" aria-hidden="true"></span>
+                </button>
+              </li>
+            </ol>
+          </nav>
+        </div>
+
+        <p class="rail__privacy">
+          Saved only in this browser session. Nothing is sent until you confirm.
+        </p>
+      </aside>
+
+      <!-- Form workspace. Native constraints are surfaced through custom accessible feedback. -->
+      <section class="journey__workspace">
+        <header class="workspace__header">
+          <div class="brand brand--mobile" aria-hidden="true">
+            <span class="brand__mark">N</span>
+            <span>Northstar</span>
+          </div>
+
+          <div class="save-state">
+            <span class="save-state__dot" aria-hidden="true"></span>
+            <span id="saveStatus" role="status" aria-live="polite">
+              Draft not saved yet
+            </span>
+          </div>
+          <button id="saveDraftButton" class="text-button" type="button">
+            Save draft
+          </button>
+        </header>
+
+        <div class="mobile-progress" aria-hidden="true">
+          <span id="mobileProgressLabel">Step 1 of 4</span>
+          <span id="mobileProgressTitle">About you</span>
+        </div>
+
+        <form id="multiStepForm" novalidate>
+          <div class="form-stage">
+            <!-- Step 1: Contact details. -->
+            <fieldset class="form-step" data-step="0">
+              <legend tabindex="-1" data-stage-focus>
+                <span class="step-kicker">01 — About you</span>
+                <span class="step-title">Let’s start with the essentials.</span>
+              </legend>
+              <p class="step-description">
+                Tell us who we should contact about this project.
+              </p>
+
+              <div class="field-grid field-grid--two">
+                <div class="field">
+                  <label for="fullName">Full name <span aria-hidden="true">*</span></label>
+                  <input
+                    id="fullName"
+                    name="fullName"
+                    type="text"
+                    autocomplete="name"
+                    placeholder="Alex Morgan"
+                    minlength="2"
+                    maxlength="80"
+                    required
+                    aria-describedby="fullNameHint fullNameError"
+                    aria-errormessage="fullNameError"
+                  >
+                  <p id="fullNameHint" class="field__hint">Use the name you prefer to go by.</p>
+                  <p id="fullNameError" class="field__error" aria-live="polite"></p>
+                </div>
+
+                <div class="field">
+                  <label for="email">Work email <span aria-hidden="true">*</span></label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    inputmode="email"
+                    placeholder="alex@company.com"
+                    maxlength="120"
+                    required
+                    aria-describedby="emailHint emailError"
+                    aria-errormessage="emailError"
+                  >
+                  <p id="emailHint" class="field__hint">We’ll use this for project updates.</p>
+                  <p id="emailError" class="field__error" aria-live="polite"></p>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="company">Company or team <span class="optional">Optional</span></label>
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  autocomplete="organization"
+                  placeholder="Studio North"
+                  maxlength="100"
+                  aria-describedby="companyHint companyError"
+                  aria-errormessage="companyError"
+                >
+                <p id="companyHint" class="field__hint">Leave blank if this is a personal project.</p>
+                <p id="companyError" class="field__error" aria-live="polite"></p>
+              </div>
+            </fieldset>
+
+            <!-- Step 2: Project definition. -->
+            <fieldset class="form-step" data-step="1" hidden>
+              <legend tabindex="-1" data-stage-focus>
+                <span class="step-kicker">02 — The project</span>
+                <span class="step-title">What are we bringing to life?</span>
+              </legend>
+              <p class="step-description">
+                A little context helps us shape the right starting point.
+              </p>
+
+              <fieldset
+                class="choice-group"
+                aria-describedby="projectTypeHint projectTypeError"
+              >
+                <legend>Project type <span aria-hidden="true">*</span></legend>
+                <p id="projectTypeHint" class="field__hint">Choose the closest match.</p>
+                <div class="choice-grid choice-grid--three">
+                  <label class="choice-card">
+                    <input type="radio" name="projectType" value="website" required>
+                    <span class="choice-card__visual" aria-hidden="true">W</span>
+                    <span>
+                      <strong>Website</strong>
+                      <small>Marketing or product site</small>
+                    </span>
+                  </label>
+                  <label class="choice-card">
+                    <input type="radio" name="projectType" value="product" required>
+                    <span class="choice-card__visual" aria-hidden="true">P</span>
+                    <span>
+                      <strong>Digital product</strong>
+                      <small>App, portal or platform</small>
+                    </span>
+                  </label>
+                  <label class="choice-card">
+                    <input type="radio" name="projectType" value="brand" required>
+                    <span class="choice-card__visual" aria-hidden="true">B</span>
+                    <span>
+                      <strong>Brand system</strong>
+                      <small>Identity and direction</small>
+                    </span>
+                  </label>
+                </div>
+                <p id="projectTypeError" class="field__error" aria-live="polite"></p>
+              </fieldset>
+
+              <div class="field">
+                <label for="projectName">Working project name <span aria-hidden="true">*</span></label>
+                <input
+                  id="projectName"
+                  name="projectName"
+                  type="text"
+                  placeholder="Project Aurora"
+                  minlength="3"
+                  maxlength="80"
+                  required
+                  aria-describedby="projectNameHint projectNameError"
+                  aria-errormessage="projectNameError"
+                >
+                <p id="projectNameHint" class="field__hint">A temporary name is perfectly fine.</p>
+                <p id="projectNameError" class="field__error" aria-live="polite"></p>
+              </div>
+
+              <div class="field">
+                <div class="label-row">
+                  <label for="projectBrief">The goal <span aria-hidden="true">*</span></label>
+                  <span id="briefCount" class="character-count">0 / 500</span>
+                </div>
+                <textarea
+                  id="projectBrief"
+                  name="projectBrief"
+                  rows="5"
+                  placeholder="What should this project change, improve or make possible?"
+                  minlength="30"
+                  maxlength="500"
+                  required
+                  aria-describedby="projectBriefHint projectBriefError briefCount"
+                  aria-errormessage="projectBriefError"
+                ></textarea>
+                <p id="projectBriefHint" class="field__hint">Aim for one or two clear sentences.</p>
+                <p id="projectBriefError" class="field__error" aria-live="polite"></p>
+              </div>
+            </fieldset>
+
+            <!-- Step 3: Delivery constraints. -->
+            <fieldset class="form-step" data-step="2" hidden>
+              <legend tabindex="-1" data-stage-focus>
+                <span class="step-kicker">03 — The plan</span>
+                <span class="step-title">Let’s align on the practical side.</span>
+              </legend>
+              <p class="step-description">
+                These details help us recommend a realistic path forward.
+              </p>
+
+              <div class="field-grid field-grid--two">
+                <div class="field">
+                  <label for="timeline">Ideal pace <span aria-hidden="true">*</span></label>
+                  <div class="select-wrap">
+                    <select
+                      id="timeline"
+                      name="timeline"
+                      required
+                      aria-describedby="timelineHint timelineError"
+                      aria-errormessage="timelineError"
+                    >
+                      <option value="">Select a timeframe</option>
+                      <option value="2-4-weeks">2–4 weeks</option>
+                      <option value="1-2-months">1–2 months</option>
+                      <option value="3-plus-months">3+ months</option>
+                      <option value="flexible">Flexible</option>
+                    </select>
+                  </div>
+                  <p id="timelineHint" class="field__hint">An estimate is enough for now.</p>
+                  <p id="timelineError" class="field__error" aria-live="polite"></p>
+                </div>
+
+                <div class="field">
+                  <label for="targetDate">Target start date <span aria-hidden="true">*</span></label>
+                  <input
+                    id="targetDate"
+                    name="targetDate"
+                    type="date"
+                    required
+                    aria-describedby="targetDateHint targetDateError"
+                    aria-errormessage="targetDateError"
+                  >
+                  <p id="targetDateHint" class="field__hint">Choose today or a future date.</p>
+                  <p id="targetDateError" class="field__error" aria-live="polite"></p>
+                </div>
+              </div>
+
+              <fieldset class="choice-group" aria-describedby="budgetHint budgetError">
+                <legend>Estimated budget <span aria-hidden="true">*</span></legend>
+                <p id="budgetHint" class="field__hint">Select the range that feels most realistic.</p>
+                <div class="choice-grid choice-grid--four">
+                  <label class="choice-pill">
+                    <input type="radio" name="budget" value="under-5k" required>
+                    <span>Under €5k</span>
+                  </label>
+                  <label class="choice-pill">
+                    <input type="radio" name="budget" value="5k-10k" required>
+                    <span>€5k–€10k</span>
+                  </label>
+                  <label class="choice-pill">
+                    <input type="radio" name="budget" value="10k-25k" required>
+                    <span>€10k–€25k</span>
+                  </label>
+                  <label class="choice-pill">
+                    <input type="radio" name="budget" value="discuss" required>
+                    <span>Let’s discuss</span>
+                  </label>
+                </div>
+                <p id="budgetError" class="field__error" aria-live="polite"></p>
+              </fieldset>
+
+              <label class="check-card" for="nda">
+                <input id="nda" name="nda" type="checkbox">
+                <span class="check-card__box" aria-hidden="true"></span>
+                <span>
+                  <strong>I’ll need an NDA</strong>
+                  <small>We can arrange this before detailed materials are shared.</small>
+                </span>
+              </label>
+            </fieldset>
+
+            <!-- Step 4: Safe, text-only summary. User values are inserted with textContent in JavaScript. -->
+            <fieldset class="form-step" data-step="3" hidden>
+              <legend tabindex="-1" data-stage-focus>
+                <span class="step-kicker">04 — Review</span>
+                <span class="step-title">Everything in one place.</span>
+              </legend>
+              <p class="step-description">
+                Check your details and edit any section before confirming.
+              </p>
+
+              <div class="summary-grid">
+                <section class="summary-card" aria-labelledby="contactSummaryTitle">
+                  <div class="summary-card__header">
+                    <h2 id="contactSummaryTitle">About you</h2>
+                    <button type="button" class="edit-button" data-edit-step="0">Edit</button>
+                  </div>
+                  <dl>
+                    <div><dt>Name</dt><dd id="summaryName">—</dd></div>
+                    <div><dt>Email</dt><dd id="summaryEmail">—</dd></div>
+                    <div><dt>Company</dt><dd id="summaryCompany">—</dd></div>
+                  </dl>
+                </section>
+
+                <section class="summary-card" aria-labelledby="projectSummaryTitle">
+                  <div class="summary-card__header">
+                    <h2 id="projectSummaryTitle">The project</h2>
+                    <button type="button" class="edit-button" data-edit-step="1">Edit</button>
+                  </div>
+                  <dl>
+                    <div><dt>Type</dt><dd id="summaryProjectType">—</dd></div>
+                    <div><dt>Name</dt><dd id="summaryProjectName">—</dd></div>
+                    <div class="summary-card__wide"><dt>Goal</dt><dd id="summaryBrief">—</dd></div>
+                  </dl>
+                </section>
+
+                <section class="summary-card summary-card--wide" aria-labelledby="planSummaryTitle">
+                  <div class="summary-card__header">
+                    <h2 id="planSummaryTitle">The plan</h2>
+                    <button type="button" class="edit-button" data-edit-step="2">Edit</button>
+                  </div>
+                  <dl class="summary-list--columns">
+                    <div><dt>Pace</dt><dd id="summaryTimeline">—</dd></div>
+                    <div><dt>Start</dt><dd id="summaryDate">—</dd></div>
+                    <div><dt>Budget</dt><dd id="summaryBudget">—</dd></div>
+                    <div><dt>NDA</dt><dd id="summaryNda">—</dd></div>
+                  </dl>
+                </section>
+              </div>
+
+              <div class="confirm-wrap">
+                <label class="check-card check-card--compact" for="consent">
+                  <input
+                    id="consent"
+                    name="consent"
+                    type="checkbox"
+                    required
+                    aria-describedby="consentError"
+                    aria-errormessage="consentError"
+                  >
+                  <span class="check-card__box" aria-hidden="true"></span>
+                  <span>
+                    <strong>I’ve reviewed these details</strong>
+                    <small>I confirm this brief is ready for the next step.</small>
+                  </span>
+                </label>
+                <p id="consentError" class="field__error" aria-live="polite"></p>
+              </div>
+            </fieldset>
+
+            <!-- Completion state shown after the local demo submission. -->
+            <section id="successState" class="success-state" tabindex="-1" hidden>
+              <div class="success-state__mark" aria-hidden="true">✓</div>
+              <p class="step-kicker">Brief complete</p>
+              <h2>Your project has a clear starting point.</h2>
+              <p>
+                This demo stops before sending data to a server. Your temporary
+                session draft has been cleared successfully.
+              </p>
+              <button id="startAgainButton" class="button button--primary" type="button">
+                Start a new brief
+              </button>
+            </section>
+          </div>
+
+          <footer id="formActions" class="form-actions">
+            <button id="backButton" class="button button--ghost" type="button" hidden>
+              <span aria-hidden="true">←</span> Back
+            </button>
+            <span class="form-actions__spacer"></span>
+            <button id="nextButton" class="button button--primary" type="button">
+              Continue <span aria-hidden="true">→</span>
+            </button>
+            <button id="submitButton" class="button button--primary" type="submit" hidden>
+              Confirm brief <span aria-hidden="true">→</span>
+            </button>
+          </footer>
+        </form>
+      </section>
+    </main>
+
+    <!-- Session recovery prompt. -->
+    <dialog id="restoreDialog" class="restore-dialog" aria-labelledby="restoreTitle">
+      <div class="restore-dialog__mark" aria-hidden="true">↻</div>
+      <p class="step-kicker">Session found</p>
+      <h2 id="restoreTitle">Continue where you left off?</h2>
+      <p>
+        We found a draft saved <strong id="restoreTimestamp">in this session</strong>.
+        Restore it or begin with a clean form.
+      </p>
+      <div class="restore-dialog__actions">
+        <button id="discardDraftButton" class="button button--ghost" type="button">
+          Start fresh
+        </button>
+        <button id="restoreDraftButton" class="button button--primary" type="button" autofocus>
+          Restore draft
+        </button>
+      </div>
+    </dialog>
+  </body>
+</html>
