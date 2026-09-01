@@ -1,1 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A dependency-aware project checklist with nested tasks and real-time progress tracking.">
+  <meta name="theme-color" content="#111318">
+  <title>Relay — Dependency Checklist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#task-list">Skip to checklist</a>
 
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <a class="brand" href="#" aria-label="Relay home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>relay</span>
+      </a>
+
+      <nav class="nav-list" aria-label="Workspace">
+        <a class="nav-item active" href="#task-list" aria-current="page">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 5h10M9 12h10M9 19h10M4 5h.01M4 12h.01M4 19h.01"/></svg>
+          Checklist
+        </a>
+        <button class="nav-item" id="open-dependency-map" type="button">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="m7 11 10-4M7 13l10 4"/></svg>
+          Dependencies
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="mini-progress" aria-label="Overall project progress">
+          <div class="mini-progress-row"><span>Project progress</span><strong id="sidebar-progress">0%</strong></div>
+          <div class="progress-track"><span id="sidebar-progress-bar"></span></div>
+        </div>
+        <button class="profile" type="button" aria-label="Open profile menu">
+          <span class="avatar">FS</span>
+          <span><strong>Francesco</strong><small>Product workspace</small></span>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu" type="button" aria-label="Open navigation" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+        <div class="breadcrumb"><span>Projects</span><i>/</i><strong>Website launch</strong></div>
+        <div class="top-actions">
+          <span class="saved-state" id="saved-state"><i></i> Saved locally</span>
+          <button class="icon-button" id="theme-toggle" type="button" aria-label="Toggle color theme">
+            <svg class="sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
+          </button>
+          <button class="avatar avatar-button" type="button" aria-label="Open account">FS</button>
+        </div>
+      </header>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <span class="eyebrow"><i></i> Active project</span>
+          <h1 id="page-title">Website launch</h1>
+          <p>Complete each step in order. Tasks unlock automatically when every prerequisite is finished.</p>
+        </div>
+        <button class="reset-button" id="reset-button" type="button">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg>
+          Reset progress
+        </button>
+      </section>
+
+      <section class="progress-panel" aria-labelledby="progress-title">
+        <div class="progress-copy">
+          <span class="progress-kicker">Overall progress</span>
+          <div class="progress-heading"><strong id="progress-count">0 of 12 tasks</strong><span id="progress-percent">0%</span></div>
+          <div class="large-progress-track" role="progressbar" aria-label="Overall completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="main-progress-bar"></span></div>
+        </div>
+        <div class="next-up" id="next-up">
+          <span class="next-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m8 5 8 7-8 7"/></svg>
+          </span>
+          <span><small>Next milestone</small><strong id="next-task">Create project brief</strong></span>
+        </div>
+      </section>
+
+      <section class="toolbar" aria-label="Checklist controls">
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button class="filter active" type="button" data-filter="all" aria-pressed="true">All <span id="all-count">12</span></button>
+          <button class="filter" type="button" data-filter="available" aria-pressed="false">Available <span id="available-count">0</span></button>
+          <button class="filter" type="button" data-filter="locked" aria-pressed="false">Locked <span id="locked-count">0</span></button>
+          <button class="filter" type="button" data-filter="completed" aria-pressed="false">Completed <span id="completed-count">0</span></button>
+        </div>
+        <button class="map-button" id="map-button" type="button">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="m7 11 10-4M7 13l10 4"/></svg>
+          View dependency map
+        </button>
+      </section>
+
+      <div class="task-list" id="task-list" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <dialog class="dependency-dialog" id="dependency-dialog" aria-labelledby="dependency-title">
+    <div class="dialog-header">
+      <div><span class="eyebrow"><i></i> Project logic</span><h2 id="dependency-title">Dependency map</h2></div>
+      <button class="dialog-close" id="dialog-close" type="button" aria-label="Close dependency map">&times;</button>
+    </div>
+    <p class="dialog-intro">Follow the paths to understand which completed tasks release the next stage.</p>
+    <div class="dependency-map" id="dependency-map"></div>
+  </dialog>
+
+  <dialog class="confirm-dialog" id="confirm-dialog" aria-labelledby="confirm-title">
+    <div class="confirm-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.7 2.8 17a2 2 0 0 0 1.7 3h15a2 2 0 0 0 1.7-3L13.7 3.7a2 2 0 0 0-3.4 0Z"/></svg>
+    </div>
+    <h2 id="confirm-title">Reset all progress?</h2>
+    <p>This will mark every task as incomplete. Your current progress cannot be recovered.</p>
+    <div class="confirm-actions">
+      <button id="cancel-reset" type="button">Cancel</button>
+      <button id="confirm-reset" type="button">Reset progress</button>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast-check">✓</span><span id="toast-message">Task completed</span>
+  </div>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
